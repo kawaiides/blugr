@@ -1,14 +1,23 @@
-import warnings
-import asyncio
-from ollama import AsyncClient
-from structured_outputs import Summary
-import json
+from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import google.generativeai as genai
+import os
 
-async def summarizer_chat(transcript):
-    message = {
-      'role': 'user',
-      'content': \
-        f"""
+load_dotenv()
+app = FastAPI()
+api_key = os.getenv("GOOGLE_API_KEY")
+genai.configure(api_key=api_key)
+
+class TextInput(BaseModel):
+    text: str
+
+@app.post("/generate-text")
+async def generate_text(text_input: TextInput):
+    try:
+        model = genai.GenerativeModel("gemini-1.5-flash") # Or "gemini-pro"
+        transcript = text_input.text
+        llm_input = f"""
         Transcript: {transcript}
         
         [INST] You are given the transcript of a Youtube Video.
@@ -31,32 +40,14 @@ async def summarizer_chat(transcript):
                 p: str = Field("Paragraph, content of the blog, Maximum 150 words")
 
         Output JSON
-        """,
-    }
-    response = await AsyncClient().chat(
-        messages=[
-            message
-        ],
-        model='llama3.2:latest',
-        format=Summary.model_json_schema(),
-    )
-    with warnings.catch_warnings(record=True) as w:
-        warnings.simplefilter("always")
-        summarizer_output = Summary.model_validate_json(response.message.content)
-        if w:
-            summarizer_chat(transcript)
-            
-    return summarizer_output
+        """
+        response = model.generate_content(
+            llm_input,
+            generation_config=genai.types.GenerationConfig(
+                response_mime_type="application/json" # Enable JSON mode
+            )
+        )
+        return {"generated_text": response.text}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
-
-if __name__ == "__main__":
-    """
-        C:/Users/Asus-2023/blooogerai/llm_stuff/data/transcriptions/y1jrZ6gP2Tg.mp3_text_timestamp.txt
-    """
-    transcript_path = input("input transcript_path to summarize: ")
-    with open(f"{transcript_path}", "r") as file:
-        transcript = file.read()
-    response = asyncio.run(summarizer_chat(transcript))
-    res = response.model_dump(mode='json')
-    with open(f"./data/youtube/{transcript_path.split('/')[-2]}/summary.json", "w") as f:
-        json.dump(res, f, indent=4)
