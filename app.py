@@ -3,8 +3,18 @@ import os
 import shutil
 from whispercpp import Whisper
 from fastapi.middleware.cors import CORSMiddleware
+from ytnoti import YouTubeNotifier
 
 app = FastAPI()
+
+notifier = YouTubeNotifier()
+
+@notifier.upload()
+async def listener(video):
+    print(f"New video from {video.channel.name}: {video.title}")
+
+#notifier.subscribe("UC9EEyg7QBL-stRX-7hTV3ng")  # Channel ID of SpeedyStyle
+notifier.run(app=app)
 
 app.add_middleware(
     CORSMiddleware,
