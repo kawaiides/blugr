@@ -40,6 +40,22 @@ async def transcriptions(file: UploadFile = File(...)):
     upload_file.close()
     
     result = w.transcribe(upload_name)
+
+    segments_list = []
+    for segment in result['segments']:
+        id = segment["id"]
+        start = segment["start"]
+        end = segment["end"]
+        text = segment["text"]
+        segments_list.append(
+            {
+                "id": id,
+                "start": start,
+                "end": end,
+                "text": text
+            }
+        )
+
     text = w.extract_text(result)
     
-    return text
+    return text, segments_list
