@@ -9,14 +9,13 @@ app = FastAPI()
 api_key = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=api_key)
 
-class TextInput(BaseModel):
-    text: str
+
 
 @app.post("/generate-text")
-async def generate_text(text_input: TextInput):
+async def generate_text(transcript):
     try:
         model = genai.GenerativeModel("gemini-1.5-flash") # Or "gemini-pro"
-        transcript = text_input.text
+        # transcript = text_input.text
         llm_input = f"""
         Transcript: {transcript}
         

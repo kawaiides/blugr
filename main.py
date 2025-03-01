@@ -1,15 +1,90 @@
+import requests
+from dotenv import load_dotenv
+from pymongo import MongoClient
+from yt_dlp.dependencies import certifi
+
 from app import transcriptions
+from summarize import generate_text
 from tqdm_decorator import with_tqdm
-from datetime import timedelta
+from datetime import timedelta, datetime
 from sklearn.feature_extraction.text import TfidfVectorizer
 from youtube import Youtube
-from transcribe import transcribe_audio
-from summarize import summarizer_chat
+# from transcribe import transcribe_audio
+# from summarize import summarizer_chat
 from tfidf_search import search
 import asyncio
 import json
 import os
 import time
+
+load_dotenv()
+
+
+def get_mongo_client():
+    try:
+        uri = os.getenv("MONGO_DB_KEY")
+        if not uri:
+            raise ValueError("MongoDB URI not found in environment variables")
+
+        client = MongoClient(
+            uri,
+            serverSelectionTimeoutMS=5000,
+            ssl=True,
+            ssl_ca_certs=certifi.where(),
+            connect=True,
+            connectTimeoutMS=30000,
+            retryWrites=True,
+            w='majority'
+        )
+
+        # Test connection
+        client.admin.command('ping')
+        print("MongoDB connection successful")
+        return client
+    except Exception as e:
+        print(f"MongoDB connection failed: {str(e)}")
+        return None
+
+
+def save_to_mongodb(content_id, url, transcript_data, summary_data):
+    client = get_mongo_client()
+    if not client:
+        return False
+
+    try:
+        db = client['blugr']  # Your database name
+        collection = db['generated-texts']  # Your collection name
+
+        # Prepare document
+        document = {
+            "content_id": content_id,
+            "url": url,
+            "transcript": transcript_data,
+            "summary": summary_data,
+            "created_at": datetime.utcnow(),
+            "status": "completed"
+        }
+
+        # Use update_one with upsert to avoid duplicates
+        result = collection.update_one(
+            {"content_id": content_id},  # filter
+            {"$set": document},  # update
+            upsert=True  # create if doesn't exist
+        )
+
+        if result.upserted_id:
+            print(f"Inserted new document with ID: {result.upserted_id}")
+        else:
+            print(f"Updated existing document for content_id: {content_id}")
+
+        return True
+
+    except Exception as e:
+        print(f"Error saving to MongoDB: {str(e)}")
+        return False
+
+    finally:
+        client.close()
 
 
 def seconds_to_ffmpeg_timestamp(seconds):
@@ -89,21 +164,46 @@ async def process_youtube_url(url, log_queue=None):
         with open(f"{base_path}/transcript.txt", 'r', encoding='utf-8') as file:
             transcript = file.read()
 
-        log("Generating summary...")
-        summary_response = await summarizer_chat(transcript)
-        structed_summary_response = summary_response.model_dump(mode='json')
+        log("Generating summary using Gemini API...")
+        # Make request to the local FastAPI endpoint
+        response = await generate_text(transcript)
+
+        summary_response = response
+        print(summary_response)
 
         log("Writing summary to file...")
         with open(f"{base_path}/summary.json", "w", encoding='utf-8') as f:
-            json.dump(structed_summary_response, f, indent=4)
+            json.dump(summary_response, f, indent=4)
 
         log("Processing transcript and summary data...")
         with open(f"{base_path}/transcript.json", "r", encoding='utf-8') as file:
             timestamped_transcript = json.load(file)
-        with open(f"{base_path}/summary.json", "r", encoding='utf-8') as file:
-            summary_data = json.load(file)
 
+        transcript_data = {
+            "full_text": transcript_text,
+            "segments": transcript_result["segments"]
+        }
+
+        summary_data = {
+            "generated_text": summary_response["generated_text"],
+            "summary_json": json.loads(summary_response["generated_text"])
+        }
+
+        # Save to MongoDB
+        log("Saving to MongoDB...")
+        mongodb_success = save_to_mongodb(
+            content_id=content_id,
+            url=url,
+            transcript_data=transcript_data,
+            summary_data=summary_data
+        )
+
+        if mongodb_success:
+            log("Successfully saved to MongoDB")
+        else:
+            log("Failed to save to MongoDB")
         # Process subheadings and perform TF-IDF analysis
+        summary_data = json.loads(summary_response["generated_text"])
         subheadings = [item["h2"] for item in summary_data["body"]]
         documents = [f"{item['text']}" for item in timestamped_transcript]
 
