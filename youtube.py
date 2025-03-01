@@ -10,6 +10,7 @@ class Youtube():
     # download video and audio
     @with_tqdm
     def download_audio_from_url(self, url):
+        print("here")
         videoinfo = YoutubeDL().extract_info(url=url, download=False)
         length = videoinfo['duration']
         filename = f"./data/youtube/{videoinfo['id']}/audio.mp3"
@@ -29,7 +30,7 @@ class Youtube():
         filename = f"./data/youtube/{videoinfo['id']}/video.mp4"
         ydl_opts = {
             'outtmpl': filename,
-            'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+            'format': 'bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
         }
         with YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
@@ -113,7 +114,7 @@ class Youtube():
             '-y',               # Overwrite output file if it exists
             video_path+'most_watched.gif'         # Output file path
         ]
-        
+
         try:
             subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             print(f"GIF created at {video_path+'most_watched.gif'}")

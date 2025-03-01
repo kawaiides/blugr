@@ -19,6 +19,7 @@ class S3CRUD:
         :param file_path: Local file path.
         :param s3_path: S3 destination path.
         """
+        print("heeeeer")
         try:
             self.s3.upload_file(file_path, self.bucket_name, s3_path)
             print(f"Uploaded {file_path} to {s3_path}")

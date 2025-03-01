@@ -1,8 +1,10 @@
+# app.py
 from fastapi import FastAPI, UploadFile, File
 import os
 import shutil
 from whispercpp import Whisper
 from fastapi.middleware.cors import CORSMiddleware
+import json
 
 app = FastAPI()
 
@@ -15,21 +17,32 @@ app.add_middleware(
     expose_headers=["Content-Disposition"],
 )
 
-w = Whisper('tiny')
-UPLOAD_DIR="/tmp"
-if not os.path.exists(UPLOAD_DIR):
-    os.makedirs(UPLOAD_DIR)
-    
+w = Whisper('base')
+
+
 @app.post('/transcribe')
-async def transcriptions(file: UploadFile = File(...)):
-    filename = file.filename
-    fileobj = file.file
-    upload_name = os.path.join(UPLOAD_DIR, filename)
-    upload_file = open(upload_name, 'wb+')
-    shutil.copyfileobj(fileobj, upload_file)
-    upload_file.close()
-    
-    result = w.transcribe(upload_name)
-    text = w.extract_text(result)
-    
-    return text
+async def transcriptions(audio_filename):
+    try:
+        upload_name = os.path.abspath(audio_filename)
+
+        # Get the transcription result
+        result = w.transcribe(upload_name)
+
+        # Extract the text
+        text = w.extract_text(result)
+
+        # Create a simple segment for the entire text
+        segments = [{
+            "id": 0,
+            "start": 0,
+            "end": 0,  # You might want to get the audio duration here
+            "text": text
+        }]
+
+        return {
+            "transcription": text,
+            "segments": segments
+        }
+    except Exception as e:
+        print(f"Transcription error: {str(e)}")
+        raise
