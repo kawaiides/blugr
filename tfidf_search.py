@@ -1,51 +1,43 @@
-import json
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+# tfidf_search.py
+def search(segments, query, vectorizer, tfidf_matrix):
+    """
+    Search for segments matching the query using TF-IDF.
 
-# Function to search
-def search(data, query, vectorizer, tfidf_matrix, top_n=1):
-    # Transform the query into TF-IDF vector
-    query_vector = vectorizer.transform([query])
-    
-    # Compute cosine similarity between query and documents
-    similarities = cosine_similarity(query_vector, tfidf_matrix).flatten()
-    
-    # Sort by similarity and get top N results
-    top_indices = similarities.argsort()[-top_n:][::-1]
-    
-    # Return the top N results
-    results = []
-    for idx in top_indices:
-        results.append({
-            "id": data[idx]["id"],
-            "start": data[idx]["start"],
-            "end": data[idx]["end"],
-            "text": data[idx]["text"],
-            "query": query,
-            "similarity": similarities[idx]
-        })
-    return results
+    Args:
+        segments: List of transcript segments
+        query: Search query string
+        vectorizer: Fitted TfidfVectorizer
+        tfidf_matrix: Pre-computed TF-IDF matrix for segments
 
-if __name__ == "__main__":
-    path = input("input video path: ")
-    summary_path = path + '/summary.json'
-    timestamped_transcript_path = path + '/transcript.json'
+    Returns:
+        List of matching segments with scores
+    """
+    try:
+        # Transform query using the same vectorizer
+        query_vector = vectorizer.transform([query])
 
-    with open(f"{timestamped_transcript_path}", "r") as file:
-        timestamped_transcript = json.load(file)
-    with open(f"{summary_path}", "r") as file:
-        summary_data = json.load(file)
-    
-    subheadings = [item["h2"] for item in summary_data["body"]]
-    documents = [f"{item['text']}" for item in timestamped_transcript]
+        # Calculate similarity scores
+        similarity_scores = (tfidf_matrix @ query_vector.T).toarray().flatten()
 
-    vectorizer = TfidfVectorizer(stop_words='english')
-    tfidf_matrix = vectorizer.fit_transform(documents)
+        # Get matching segments with scores
+        matches = []
+        for idx, score in enumerate(similarity_scores):
+            if score > 0:  # Only include matches with positive scores
+                segment = segments[idx]
+                matches.append({
+                    "segment_id": idx,
+                    "start": segment["start"],
+                    "end": segment["end"],
+                    "text": segment["text"],
+                    "score": float(score)  # Convert numpy float to Python float
+                })
 
-    results = []
-    for subheading in subheadings:
-        res = search(timestamped_transcript, subheading, vectorizer, tfidf_matrix)
-        results.append(res)
+        # Sort by score in descending order
+        matches.sort(key=lambda x: x["score"], reverse=True)
 
-    with open(f"{path}/search_results.json", 'w') as file:
-        json.dump(results, file, indent=4)
+        # Return top matches (e.g., top 5)
+        return matches[:5]
+
+    except Exception as e:
+        print(f"Search error: {str(e)}")
+        return []

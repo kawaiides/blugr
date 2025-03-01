@@ -1,36 +1,1824 @@
-[
-  {
-    "id": 0,
-    "start": 0,
-    "end": 0,
-    "text": [
-      " The USA is the largest and most influential economy to have ever existed in human history.",
-      " For over a century it has dominated the world.",
-      " More wealth has been credited here in just the last 20 years and the entire world credit",
-      " between 1 and 1700 AED.",
-      " But the question is, why?",
-      " Capital moved faster.",
-      " Once you get a dominant position in the currency, it's very difficult to lose it.",
-      " Immigration and innovation.",
-      " The US financial markets are the deepest, broadest, biggest markets in the world.",
-      " I haven't yet to meet a person on Wall Street who can operate on somebody's brain.",
-      " The economics explain team traveled across the world to try and answer this one simple",
-      " question.",
-      " We sat down with some of the brightest minds in economics, finance and policy to find",
-      " us.",
-      " I came to Wall Street because I had no money growing up as a kid and I wanted to get rich.",
-      " The USA isn't the largest country in the world, it doesn't have the most resources or the",
-      " most manpower.",
-      " What was it sacred?",
-      " Wealth has been concentrated with a very small percentage.",
-      " The United States is able to allocate resources in a way which gives the United States a significant",
-      " advantage.",
-      " This is a culture of risk takers.",
-      " One of the reasons that the US has stronger trend growth, we allow more migrants in.",
-      " Does this all work when the US has to share the global spotlight with arrival?",
-      " And what happens if the American Empire stops working for the American people?",
-      " [Music]",
-      " [Music]"
-    ]
+{
+  "segments": [
+    {
+      "id": 0,
+      "start": 3.0400000000000027,
+      "end": 8.1,
+      "text": "The USA is the largest and most influential economy to have ever existed in human history.",
+      "words": [
+        {
+          "word": " The",
+          "start": 3.0400000000000027,
+          "end": 3.58,
+          "probability": 0.5870739817619324
+        },
+        {
+          "word": " USA",
+          "start": 3.58,
+          "end": 3.78,
+          "probability": 0.9582640528678894
+        },
+        {
+          "word": " is",
+          "start": 3.78,
+          "end": 4.26,
+          "probability": 0.9876340627670288
+        },
+        {
+          "word": " the",
+          "start": 4.26,
+          "end": 4.38,
+          "probability": 0.9880356192588806
+        },
+        {
+          "word": " largest",
+          "start": 4.38,
+          "end": 4.76,
+          "probability": 0.9979647397994995
+        },
+        {
+          "word": " and",
+          "start": 4.76,
+          "end": 4.98,
+          "probability": 0.996367335319519
+        },
+        {
+          "word": " most",
+          "start": 4.98,
+          "end": 5.18,
+          "probability": 0.9975549578666687
+        },
+        {
+          "word": " influential",
+          "start": 5.18,
+          "end": 5.66,
+          "probability": 0.9991174340248108
+        },
+        {
+          "word": " economy",
+          "start": 5.66,
+          "end": 6.1,
+          "probability": 0.9926712512969971
+        },
+        {
+          "word": " to",
+          "start": 6.1,
+          "end": 6.26,
+          "probability": 0.9863182306289673
+        },
+        {
+          "word": " have",
+          "start": 6.26,
+          "end": 6.4,
+          "probability": 0.7610470056533813
+        },
+        {
+          "word": " ever",
+          "start": 6.4,
+          "end": 6.66,
+          "probability": 0.9983218312263489
+        },
+        {
+          "word": " existed",
+          "start": 6.66,
+          "end": 7.06,
+          "probability": 0.9957494735717773
+        },
+        {
+          "word": " in",
+          "start": 7.06,
+          "end": 7.24,
+          "probability": 0.9962692260742188
+        },
+        {
+          "word": " human",
+          "start": 7.24,
+          "end": 7.52,
+          "probability": 0.9934139847755432
+        },
+        {
+          "word": " history.",
+          "start": 7.52,
+          "end": 8.1,
+          "probability": 0.9998612403869629
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "start": 11.5,
+      "end": 13.66,
+      "text": "For over a century, it has dominated the world.",
+      "words": [
+        {
+          "word": " For",
+          "start": 11.25,
+          "end": 11.52,
+          "probability": 0.9646677374839783
+        },
+        {
+          "word": " over",
+          "start": 11.52,
+          "end": 11.84,
+          "probability": 0.9966817498207092
+        },
+        {
+          "word": " a",
+          "start": 11.84,
+          "end": 11.96,
+          "probability": 0.9979436993598938
+        },
+        {
+          "word": " century,",
+          "start": 11.96,
+          "end": 12.28,
+          "probability": 0.9961513876914978
+        },
+        {
+          "word": " it",
+          "start": 12.48,
+          "end": 12.56,
+          "probability": 0.9960578680038452
+        },
+        {
+          "word": " has",
+          "start": 12.56,
+          "end": 12.66,
+          "probability": 0.9959713816642761
+        },
+        {
+          "word": " dominated",
+          "start": 12.66,
+          "end": 13.06,
+          "probability": 0.9859955906867981
+        },
+        {
+          "word": " the",
+          "start": 13.06,
+          "end": 13.32,
+          "probability": 0.9980363249778748
+        },
+        {
+          "word": " world.",
+          "start": 13.32,
+          "end": 13.66,
+          "probability": 0.9891082048416138
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 15.140000000000002,
+      "end": 19.28,
+      "text": "More wealth has been credited here in just the last 20 years and the entire world",
+      "words": [
+        {
+          "word": " More",
+          "start": 15.140000000000002,
+          "end": 15.68,
+          "probability": 0.965030312538147
+        },
+        {
+          "word": " wealth",
+          "start": 15.68,
+          "end": 15.94,
+          "probability": 0.9993976354598999
+        },
+        {
+          "word": " has",
+          "start": 15.94,
+          "end": 16.06,
+          "probability": 0.978473424911499
+        },
+        {
+          "word": " been",
+          "start": 16.06,
+          "end": 16.16,
+          "probability": 0.9933225512504578
+        },
+        {
+          "word": " credited",
+          "start": 16.16,
+          "end": 16.44,
+          "probability": 0.6142772436141968
+        },
+        {
+          "word": " here",
+          "start": 16.44,
+          "end": 16.72,
+          "probability": 0.987069845199585
+        },
+        {
+          "word": " in",
+          "start": 16.72,
+          "end": 16.84,
+          "probability": 0.9671047925949097
+        },
+        {
+          "word": " just",
+          "start": 16.84,
+          "end": 17.04,
+          "probability": 0.981164813041687
+        },
+        {
+          "word": " the",
+          "start": 17.04,
+          "end": 17.28,
+          "probability": 0.9933880567550659
+        },
+        {
+          "word": " last",
+          "start": 17.28,
+          "end": 17.48,
+          "probability": 0.9884220957756042
+        },
+        {
+          "word": " 20",
+          "start": 17.48,
+          "end": 17.86,
+          "probability": 0.8494049906730652
+        },
+        {
+          "word": " years",
+          "start": 17.86,
+          "end": 18.26,
+          "probability": 0.9980118274688721
+        },
+        {
+          "word": " and",
+          "start": 18.26,
+          "end": 18.62,
+          "probability": 0.5430976152420044
+        },
+        {
+          "word": " the",
+          "start": 18.62,
+          "end": 18.68,
+          "probability": 0.9789133667945862
+        },
+        {
+          "word": " entire",
+          "start": 18.68,
+          "end": 19.08,
+          "probability": 0.9947848916053772
+        },
+        {
+          "word": " world",
+          "start": 19.08,
+          "end": 19.28,
+          "probability": 0.9806751608848572
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 19.28,
+      "end": 21.8,
+      "text": "credit between 1 and 1,700 IED.",
+      "words": [
+        {
+          "word": " credit",
+          "start": 19.28,
+          "end": 19.72,
+          "probability": 0.5648579001426697
+        },
+        {
+          "word": " between",
+          "start": 19.72,
+          "end": 20.04,
+          "probability": 0.9335246086120605
+        },
+        {
+          "word": " 1",
+          "start": 20.04,
+          "end": 20.38,
+          "probability": 0.5667912364006042
+        },
+        {
+          "word": " and",
+          "start": 20.38,
+          "end": 20.62,
+          "probability": 0.7696697115898132
+        },
+        {
+          "word": " 1",
+          "start": 20.62,
+          "end": 20.8,
+          "probability": 0.24193520843982697
+        },
+        {
+          "word": ",700",
+          "start": 20.8,
+          "end": 21.36,
+          "probability": 0.9473618566989899
+        },
+        {
+          "word": " IED.",
+          "start": 21.36,
+          "end": 21.8,
+          "probability": 0.603013202548027
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 23.76,
+      "end": 26.36,
+      "text": "But the question is, why?",
+      "words": [
+        {
+          "word": " But",
+          "start": 23.48,
+          "end": 23.78,
+          "probability": 0.7258375883102417
+        },
+        {
+          "word": " the",
+          "start": 23.78,
+          "end": 23.86,
+          "probability": 0.988034188747406
+        },
+        {
+          "word": " question",
+          "start": 23.86,
+          "end": 24.14,
+          "probability": 0.998128354549408
+        },
+        {
+          "word": " is,",
+          "start": 24.14,
+          "end": 24.46,
+          "probability": 0.9986369013786316
+        },
+        {
+          "word": " why?",
+          "start": 25.06,
+          "end": 26.36,
+          "probability": 0.9043360948562622
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 28.400000000000002,
+      "end": 29.38,
+      "text": "Capital moved faster.",
+      "words": [
+        {
+          "word": " Capital",
+          "start": 28.2,
+          "end": 28.5,
+          "probability": 0.8316219449043274
+        },
+        {
+          "word": " moved",
+          "start": 28.5,
+          "end": 28.88,
+          "probability": 0.9616147875785828
+        },
+        {
+          "word": " faster.",
+          "start": 28.88,
+          "end": 29.38,
+          "probability": 0.9966849684715271
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "start": 29.5,
+      "end": 33.3,
+      "text": "Once you get a dominant position in the currency, it's very difficult to lose it.",
+      "words": [
+        {
+          "word": " Once",
+          "start": 29.5,
+          "end": 29.62,
+          "probability": 0.9087836146354675
+        },
+        {
+          "word": " you",
+          "start": 29.62,
+          "end": 29.72,
+          "probability": 0.9858413934707642
+        },
+        {
+          "word": " get",
+          "start": 29.72,
+          "end": 29.84,
+          "probability": 0.9910500049591064
+        },
+        {
+          "word": " a",
+          "start": 29.84,
+          "end": 29.94,
+          "probability": 0.9630062580108643
+        },
+        {
+          "word": " dominant",
+          "start": 29.94,
+          "end": 30.18,
+          "probability": 0.9148017764091492
+        },
+        {
+          "word": " position",
+          "start": 30.18,
+          "end": 30.68,
+          "probability": 0.9921209812164307
+        },
+        {
+          "word": " in",
+          "start": 30.68,
+          "end": 30.86,
+          "probability": 0.7254928350448608
+        },
+        {
+          "word": " the",
+          "start": 30.86,
+          "end": 30.94,
+          "probability": 0.9593253135681152
+        },
+        {
+          "word": " currency,",
+          "start": 30.94,
+          "end": 31.3,
+          "probability": 0.9956242442131042
+        },
+        {
+          "word": " it's",
+          "start": 31.62,
+          "end": 31.94,
+          "probability": 0.9890600144863129
+        },
+        {
+          "word": " very",
+          "start": 31.94,
+          "end": 32.18,
+          "probability": 0.9949538111686707
+        },
+        {
+          "word": " difficult",
+          "start": 32.18,
+          "end": 32.6,
+          "probability": 0.9997021555900574
+        },
+        {
+          "word": " to",
+          "start": 32.6,
+          "end": 32.84,
+          "probability": 0.9992839694023132
+        },
+        {
+          "word": " lose",
+          "start": 32.84,
+          "end": 33.02,
+          "probability": 0.9958968162536621
+        },
+        {
+          "word": " it.",
+          "start": 33.02,
+          "end": 33.3,
+          "probability": 0.9960149526596069
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "start": 33.64,
+      "end": 35.68,
+      "text": "Immigration and innovation.",
+      "words": [
+        {
+          "word": " Immigration",
+          "start": 33.64,
+          "end": 34.06,
+          "probability": 0.9530784487724304
+        },
+        {
+          "word": " and",
+          "start": 34.06,
+          "end": 35.02,
+          "probability": 0.9027877449989319
+        },
+        {
+          "word": " innovation.",
+          "start": 35.02,
+          "end": 35.68,
+          "probability": 0.9752935171127319
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "start": 38.2,
+      "end": 44.06,
+      "text": "The US financial markets are the deepest, broadest, biggest markets in the world.",
+      "words": [
+        {
+          "word": " The",
+          "start": 37.94,
+          "end": 38.24,
+          "probability": 0.9297486543655396
+        },
+        {
+          "word": " US",
+          "start": 38.24,
+          "end": 38.46,
+          "probability": 0.545051634311676
+        },
+        {
+          "word": " financial",
+          "start": 38.46,
+          "end": 39.02,
+          "probability": 0.9277357459068298
+        },
+        {
+          "word": " markets",
+          "start": 39.02,
+          "end": 39.46,
+          "probability": 0.9981877207756042
+        },
+        {
+          "word": " are",
+          "start": 39.46,
+          "end": 40.12,
+          "probability": 0.9966166615486145
+        },
+        {
+          "word": " the",
+          "start": 40.12,
+          "end": 40.34,
+          "probability": 0.9935865998268127
+        },
+        {
+          "word": " deepest,",
+          "start": 40.34,
+          "end": 40.94,
+          "probability": 0.9919382929801941
+        },
+        {
+          "word": " broadest,",
+          "start": 41.54,
+          "end": 42.1,
+          "probability": 0.9953199326992035
+        },
+        {
+          "word": " biggest",
+          "start": 42.22,
+          "end": 42.64,
+          "probability": 0.9666520953178406
+        },
+        {
+          "word": " markets",
+          "start": 42.64,
+          "end": 43.32,
+          "probability": 0.997765302658081
+        },
+        {
+          "word": " in",
+          "start": 43.32,
+          "end": 43.6,
+          "probability": 0.9989917874336243
+        },
+        {
+          "word": " the",
+          "start": 43.6,
+          "end": 43.76,
+          "probability": 0.9994686245918274
+        },
+        {
+          "word": " world.",
+          "start": 43.76,
+          "end": 44.06,
+          "probability": 0.9988883137702942
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "start": 44.18,
+      "end": 47.78,
+      "text": "I haven't yet to meet a person on Wall Street who can operate on somebody's brain.",
+      "words": [
+        {
+          "word": " I",
+          "start": 44.18,
+          "end": 44.22,
+          "probability": 0.9803124070167542
+        },
+        {
+          "word": " haven't",
+          "start": 44.22,
+          "end": 44.5,
+          "probability": 0.8393320143222809
+        },
+        {
+          "word": " yet",
+          "start": 44.5,
+          "end": 44.76,
+          "probability": 0.9960666298866272
+        },
+        {
+          "word": " to",
+          "start": 44.76,
+          "end": 44.98,
+          "probability": 0.9446511268615723
+        },
+        {
+          "word": " meet",
+          "start": 44.98,
+          "end": 45.16,
+          "probability": 0.9980770349502563
+        },
+        {
+          "word": " a",
+          "start": 45.16,
+          "end": 45.3,
+          "probability": 0.9987242817878723
+        },
+        {
+          "word": " person",
+          "start": 45.3,
+          "end": 45.6,
+          "probability": 0.985110878944397
+        },
+        {
+          "word": " on",
+          "start": 45.6,
+          "end": 45.78,
+          "probability": 0.9942615032196045
+        },
+        {
+          "word": " Wall",
+          "start": 45.78,
+          "end": 46.02,
+          "probability": 0.9923717975616455
+        },
+        {
+          "word": " Street",
+          "start": 46.02,
+          "end": 46.36,
+          "probability": 0.9825891256332397
+        },
+        {
+          "word": " who",
+          "start": 46.36,
+          "end": 46.62,
+          "probability": 0.9423307180404663
+        },
+        {
+          "word": " can",
+          "start": 46.62,
+          "end": 46.78,
+          "probability": 0.9596275091171265
+        },
+        {
+          "word": " operate",
+          "start": 46.78,
+          "end": 47.08,
+          "probability": 0.9961307048797607
+        },
+        {
+          "word": " on",
+          "start": 47.08,
+          "end": 47.22,
+          "probability": 0.9984183311462402
+        },
+        {
+          "word": " somebody's",
+          "start": 47.22,
+          "end": 47.62,
+          "probability": 0.9913815855979919
+        },
+        {
+          "word": " brain.",
+          "start": 47.62,
+          "end": 47.78,
+          "probability": 0.7066298127174377
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "start": 49.82,
+      "end": 54.28,
+      "text": "The economics-explaning team traveled across the world to try and answer this one simple question.",
+      "words": [
+        {
+          "word": " The",
+          "start": 49.82,
+          "end": 50.22,
+          "probability": 0.8499066233634949
+        },
+        {
+          "word": " economics",
+          "start": 50.22,
+          "end": 50.42,
+          "probability": 0.6919952034950256
+        },
+        {
+          "word": "-explaning",
+          "start": 50.42,
+          "end": 50.96,
+          "probability": 0.4227665513753891
+        },
+        {
+          "word": " team",
+          "start": 50.96,
+          "end": 51.12,
+          "probability": 0.9958266615867615
+        },
+        {
+          "word": " traveled",
+          "start": 51.12,
+          "end": 51.42,
+          "probability": 0.7117019295692444
+        },
+        {
+          "word": " across",
+          "start": 51.42,
+          "end": 51.66,
+          "probability": 0.9968975782394409
+        },
+        {
+          "word": " the",
+          "start": 51.66,
+          "end": 51.86,
+          "probability": 0.9977760910987854
+        },
+        {
+          "word": " world",
+          "start": 51.86,
+          "end": 52.08,
+          "probability": 0.9959263801574707
+        },
+        {
+          "word": " to",
+          "start": 52.08,
+          "end": 52.26,
+          "probability": 0.9854788780212402
+        },
+        {
+          "word": " try",
+          "start": 52.26,
+          "end": 52.48,
+          "probability": 0.9834995269775391
+        },
+        {
+          "word": " and",
+          "start": 52.48,
+          "end": 52.58,
+          "probability": 0.9649974703788757
+        },
+        {
+          "word": " answer",
+          "start": 52.58,
+          "end": 52.88,
+          "probability": 0.9991342425346375
+        },
+        {
+          "word": " this",
+          "start": 52.88,
+          "end": 53.1,
+          "probability": 0.9729368686676025
+        },
+        {
+          "word": " one",
+          "start": 53.1,
+          "end": 53.34,
+          "probability": 0.9566444754600525
+        },
+        {
+          "word": " simple",
+          "start": 53.34,
+          "end": 53.78,
+          "probability": 0.9496746063232422
+        },
+        {
+          "word": " question.",
+          "start": 53.78,
+          "end": 54.28,
+          "probability": 0.9981163740158081
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "start": 54.82,
+      "end": 58.32,
+      "text": "We sat down with some of the brightest minds in economics, finance and policy to find out.",
+      "words": [
+        {
+          "word": " We",
+          "start": 54.82,
+          "end": 55.02,
+          "probability": 0.9859905242919922
+        },
+        {
+          "word": " sat",
+          "start": 55.02,
+          "end": 55.16,
+          "probability": 0.9943133592605591
+        },
+        {
+          "word": " down",
+          "start": 55.16,
+          "end": 55.36,
+          "probability": 0.9975135326385498
+        },
+        {
+          "word": " with",
+          "start": 55.36,
+          "end": 55.48,
+          "probability": 0.9934686422348022
+        },
+        {
+          "word": " some",
+          "start": 55.48,
+          "end": 55.6,
+          "probability": 0.9551465511322021
+        },
+        {
+          "word": " of",
+          "start": 55.6,
+          "end": 55.66,
+          "probability": 0.9851183891296387
+        },
+        {
+          "word": " the",
+          "start": 55.66,
+          "end": 55.76,
+          "probability": 0.986957311630249
+        },
+        {
+          "word": " brightest",
+          "start": 55.76,
+          "end": 56.0,
+          "probability": 0.997329831123352
+        },
+        {
+          "word": " minds",
+          "start": 56.0,
+          "end": 56.26,
+          "probability": 0.993721604347229
+        },
+        {
+          "word": " in",
+          "start": 56.26,
+          "end": 56.4,
+          "probability": 0.9065876007080078
+        },
+        {
+          "word": " economics,",
+          "start": 56.4,
+          "end": 56.72,
+          "probability": 0.9939082860946655
+        },
+        {
+          "word": " finance",
+          "start": 56.98,
+          "end": 57.16,
+          "probability": 0.571275532245636
+        },
+        {
+          "word": " and",
+          "start": 57.16,
+          "end": 57.34,
+          "probability": 0.6359853148460388
+        },
+        {
+          "word": " policy",
+          "start": 57.34,
+          "end": 57.66,
+          "probability": 0.996349573135376
+        },
+        {
+          "word": " to",
+          "start": 57.66,
+          "end": 57.78,
+          "probability": 0.9760328531265259
+        },
+        {
+          "word": " find",
+          "start": 57.78,
+          "end": 58.06,
+          "probability": 0.9958682060241699
+        },
+        {
+          "word": " out.",
+          "start": 58.06,
+          "end": 58.32,
+          "probability": 0.9564704895019531
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "start": 60.980000000000004,
+      "end": 66.04,
+      "text": "I came to Wall Street because I had no money growing up as a kid and I wanted to get rich.",
+      "words": [
+        {
+          "word": " I",
+          "start": 60.980000000000004,
+          "end": 61.38,
+          "probability": 0.7371257543563843
+        },
+        {
+          "word": " came",
+          "start": 61.38,
+          "end": 61.5,
+          "probability": 0.6493496894836426
+        },
+        {
+          "word": " to",
+          "start": 61.5,
+          "end": 61.62,
+          "probability": 0.9387407302856445
+        },
+        {
+          "word": " Wall",
+          "start": 61.62,
+          "end": 61.78,
+          "probability": 0.9447912573814392
+        },
+        {
+          "word": " Street",
+          "start": 61.78,
+          "end": 61.98,
+          "probability": 0.9902977347373962
+        },
+        {
+          "word": " because",
+          "start": 61.98,
+          "end": 62.46,
+          "probability": 0.9887185096740723
+        },
+        {
+          "word": " I",
+          "start": 62.46,
+          "end": 63.24,
+          "probability": 0.9772442579269409
+        },
+        {
+          "word": " had",
+          "start": 63.24,
+          "end": 63.34,
+          "probability": 0.9940126538276672
+        },
+        {
+          "word": " no",
+          "start": 63.34,
+          "end": 63.5,
+          "probability": 0.9988890290260315
+        },
+        {
+          "word": " money",
+          "start": 63.5,
+          "end": 63.72,
+          "probability": 0.9997349381446838
+        },
+        {
+          "word": " growing",
+          "start": 63.72,
+          "end": 63.92,
+          "probability": 0.72966468334198
+        },
+        {
+          "word": " up",
+          "start": 63.92,
+          "end": 64.12,
+          "probability": 0.991658627986908
+        },
+        {
+          "word": " as",
+          "start": 64.12,
+          "end": 64.24,
+          "probability": 0.9962798953056335
+        },
+        {
+          "word": " a",
+          "start": 64.24,
+          "end": 64.32,
+          "probability": 0.9975952506065369
+        },
+        {
+          "word": " kid",
+          "start": 64.32,
+          "end": 64.5,
+          "probability": 0.998117208480835
+        },
+        {
+          "word": " and",
+          "start": 64.5,
+          "end": 65.22,
+          "probability": 0.6134564876556396
+        },
+        {
+          "word": " I",
+          "start": 65.22,
+          "end": 65.28,
+          "probability": 0.9660421013832092
+        },
+        {
+          "word": " wanted",
+          "start": 65.28,
+          "end": 65.42,
+          "probability": 0.9944381713867188
+        },
+        {
+          "word": " to",
+          "start": 65.42,
+          "end": 65.56,
+          "probability": 0.9771191477775574
+        },
+        {
+          "word": " get",
+          "start": 65.56,
+          "end": 65.68,
+          "probability": 0.9932283759117126
+        },
+        {
+          "word": " rich.",
+          "start": 65.68,
+          "end": 66.04,
+          "probability": 0.9778345823287964
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "start": 66.4,
+      "end": 68.36,
+      "text": "The USA isn't the largest country in the world.",
+      "words": [
+        {
+          "word": " The",
+          "start": 66.4,
+          "end": 66.46,
+          "probability": 0.9688198566436768
+        },
+        {
+          "word": " USA",
+          "start": 66.46,
+          "end": 66.6,
+          "probability": 0.9133777022361755
+        },
+        {
+          "word": " isn't",
+          "start": 66.6,
+          "end": 67.16,
+          "probability": 0.9030794203281403
+        },
+        {
+          "word": " the",
+          "start": 67.16,
+          "end": 67.32,
+          "probability": 0.9960671067237854
+        },
+        {
+          "word": " largest",
+          "start": 67.32,
+          "end": 67.6,
+          "probability": 0.9926411509513855
+        },
+        {
+          "word": " country",
+          "start": 67.6,
+          "end": 67.94,
+          "probability": 0.9990848302841187
+        },
+        {
+          "word": " in",
+          "start": 67.94,
+          "end": 68.06,
+          "probability": 0.9840565919876099
+        },
+        {
+          "word": " the",
+          "start": 68.06,
+          "end": 68.12,
+          "probability": 0.9985201954841614
+        },
+        {
+          "word": " world.",
+          "start": 68.12,
+          "end": 68.36,
+          "probability": 0.9994032382965088
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "start": 68.36,
+      "end": 70.72,
+      "text": "It doesn't have the most resources or the most manpower.",
+      "words": [
+        {
+          "word": " It",
+          "start": 68.36,
+          "end": 68.48,
+          "probability": 0.9914608001708984
+        },
+        {
+          "word": " doesn't",
+          "start": 68.48,
+          "end": 68.82,
+          "probability": 0.9979177713394165
+        },
+        {
+          "word": " have",
+          "start": 68.82,
+          "end": 68.94,
+          "probability": 0.9976902008056641
+        },
+        {
+          "word": " the",
+          "start": 68.94,
+          "end": 69.06,
+          "probability": 0.9424129724502563
+        },
+        {
+          "word": " most",
+          "start": 69.06,
+          "end": 69.2,
+          "probability": 0.996956467628479
+        },
+        {
+          "word": " resources",
+          "start": 69.2,
+          "end": 69.56,
+          "probability": 0.9963492155075073
+        },
+        {
+          "word": " or",
+          "start": 69.56,
+          "end": 69.96,
+          "probability": 0.8755626082420349
+        },
+        {
+          "word": " the",
+          "start": 69.96,
+          "end": 70.06,
+          "probability": 0.9679498672485352
+        },
+        {
+          "word": " most",
+          "start": 70.06,
+          "end": 70.22,
+          "probability": 0.9929332733154297
+        },
+        {
+          "word": " manpower.",
+          "start": 70.22,
+          "end": 70.72,
+          "probability": 0.9602376222610474
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "start": 71.06,
+      "end": 71.86,
+      "text": "So what was it's secret?",
+      "words": [
+        {
+          "word": " So",
+          "start": 71.06,
+          "end": 71.12,
+          "probability": 0.5701143145561218
+        },
+        {
+          "word": " what",
+          "start": 71.12,
+          "end": 71.26,
+          "probability": 0.918956995010376
+        },
+        {
+          "word": " was",
+          "start": 71.26,
+          "end": 71.42,
+          "probability": 0.9989859461784363
+        },
+        {
+          "word": " it's",
+          "start": 71.42,
+          "end": 71.64,
+          "probability": 0.6153851449489594
+        },
+        {
+          "word": " secret?",
+          "start": 71.64,
+          "end": 71.86,
+          "probability": 0.9488784074783325
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "start": 73.22,
+      "end": 75.94,
+      "text": "The wealth has been concentrated with a very small percentage.",
+      "words": [
+        {
+          "word": " The",
+          "start": 73.22,
+          "end": 73.48,
+          "probability": 0.7791439890861511
+        },
+        {
+          "word": " wealth",
+          "start": 73.48,
+          "end": 73.64,
+          "probability": 0.9893252849578857
+        },
+        {
+          "word": " has",
+          "start": 73.64,
+          "end": 73.8,
+          "probability": 0.7927417159080505
+        },
+        {
+          "word": " been",
+          "start": 73.8,
+          "end": 73.94,
+          "probability": 0.9866147637367249
+        },
+        {
+          "word": " concentrated",
+          "start": 73.94,
+          "end": 74.34,
+          "probability": 0.9871383309364319
+        },
+        {
+          "word": " with",
+          "start": 74.34,
+          "end": 74.66,
+          "probability": 0.9860987663269043
+        },
+        {
+          "word": " a",
+          "start": 74.66,
+          "end": 74.8,
+          "probability": 0.9947445392608643
+        },
+        {
+          "word": " very",
+          "start": 74.8,
+          "end": 75.2,
+          "probability": 0.996664822101593
+        },
+        {
+          "word": " small",
+          "start": 75.2,
+          "end": 75.48,
+          "probability": 0.9743130207061768
+        },
+        {
+          "word": " percentage.",
+          "start": 75.48,
+          "end": 75.94,
+          "probability": 0.9986017346382141
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "start": 75.94,
+      "end": 83.72,
+      "text": "The United States is able to allocate resources in a way which gives the United States a significant advantage.",
+      "words": [
+        {
+          "word": " The",
+          "start": 75.94,
+          "end": 76.34,
+          "probability": 0.3768477439880371
+        },
+        {
+          "word": " United",
+          "start": 76.34,
+          "end": 76.46,
+          "probability": 0.9811809062957764
+        },
+        {
+          "word": " States",
+          "start": 76.46,
+          "end": 76.88,
+          "probability": 0.9992592930793762
+        },
+        {
+          "word": " is",
+          "start": 76.88,
+          "end": 77.28,
+          "probability": 0.9880460500717163
+        },
+        {
+          "word": " able",
+          "start": 77.28,
+          "end": 77.74,
+          "probability": 0.996517539024353
+        },
+        {
+          "word": " to",
+          "start": 77.74,
+          "end": 77.96,
+          "probability": 0.9978984594345093
+        },
+        {
+          "word": " allocate",
+          "start": 77.96,
+          "end": 78.52,
+          "probability": 0.9874789714813232
+        },
+        {
+          "word": " resources",
+          "start": 78.52,
+          "end": 79.34,
+          "probability": 0.9926786422729492
+        },
+        {
+          "word": " in",
+          "start": 79.34,
+          "end": 80.28,
+          "probability": 0.9407705068588257
+        },
+        {
+          "word": " a",
+          "start": 80.28,
+          "end": 80.44,
+          "probability": 0.9955623149871826
+        },
+        {
+          "word": " way",
+          "start": 80.44,
+          "end": 80.8,
+          "probability": 0.9993244409561157
+        },
+        {
+          "word": " which",
+          "start": 80.8,
+          "end": 81.24,
+          "probability": 0.9120147824287415
+        },
+        {
+          "word": " gives",
+          "start": 81.24,
+          "end": 81.42,
+          "probability": 0.9917135238647461
+        },
+        {
+          "word": " the",
+          "start": 81.42,
+          "end": 81.64,
+          "probability": 0.9018526673316956
+        },
+        {
+          "word": " United",
+          "start": 81.64,
+          "end": 81.8,
+          "probability": 0.9950233697891235
+        },
+        {
+          "word": " States",
+          "start": 81.8,
+          "end": 82.26,
+          "probability": 0.9979547262191772
+        },
+        {
+          "word": " a",
+          "start": 82.26,
+          "end": 82.48,
+          "probability": 0.9747694730758667
+        },
+        {
+          "word": " significant",
+          "start": 82.48,
+          "end": 83.06,
+          "probability": 0.9905125498771667
+        },
+        {
+          "word": " advantage.",
+          "start": 83.06,
+          "end": 83.72,
+          "probability": 0.99831223487854
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "start": 84.08,
+      "end": 85.68,
+      "text": "This is a culture of risk takers.",
+      "words": [
+        {
+          "word": " This",
+          "start": 84.08,
+          "end": 84.22,
+          "probability": 0.8552542328834534
+        },
+        {
+          "word": " is",
+          "start": 84.22,
+          "end": 84.38,
+          "probability": 0.9934184551239014
+        },
+        {
+          "word": " a",
+          "start": 84.38,
+          "end": 84.5,
+          "probability": 0.9782088994979858
+        },
+        {
+          "word": " culture",
+          "start": 84.5,
+          "end": 84.84,
+          "probability": 0.9915071725845337
+        },
+        {
+          "word": " of",
+          "start": 84.84,
+          "end": 85.12,
+          "probability": 0.9893385171890259
+        },
+        {
+          "word": " risk",
+          "start": 85.12,
+          "end": 85.24,
+          "probability": 0.9383148550987244
+        },
+        {
+          "word": " takers.",
+          "start": 85.24,
+          "end": 85.68,
+          "probability": 0.896660566329956
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "start": 86.1,
+      "end": 90.48,
+      "text": "One of the reasons that the US has stronger trend growth, we allow more migrants in.",
+      "words": [
+        {
+          "word": " One",
+          "start": 86.1,
+          "end": 86.56,
+          "probability": 0.9555022120475769
+        },
+        {
+          "word": " of",
+          "start": 86.56,
+          "end": 86.64,
+          "probability": 0.9967042803764343
+        },
+        {
+          "word": " the",
+          "start": 86.64,
+          "end": 86.74,
+          "probability": 0.9986717700958252
+        },
+        {
+          "word": " reasons",
+          "start": 86.74,
+          "end": 86.98,
+          "probability": 0.9950366616249084
+        },
+        {
+          "word": " that",
+          "start": 86.98,
+          "end": 87.22,
+          "probability": 0.9061658978462219
+        },
+        {
+          "word": " the",
+          "start": 87.22,
+          "end": 87.34,
+          "probability": 0.9932963252067566
+        },
+        {
+          "word": " US",
+          "start": 87.34,
+          "end": 87.5,
+          "probability": 0.5127876996994019
+        },
+        {
+          "word": " has",
+          "start": 87.5,
+          "end": 87.72,
+          "probability": 0.9961257576942444
+        },
+        {
+          "word": " stronger",
+          "start": 87.72,
+          "end": 88.08,
+          "probability": 0.9453743100166321
+        },
+        {
+          "word": " trend",
+          "start": 88.08,
+          "end": 88.5,
+          "probability": 0.9899397492408752
+        },
+        {
+          "word": " growth,",
+          "start": 88.5,
+          "end": 88.86,
+          "probability": 0.9308300614356995
+        },
+        {
+          "word": " we",
+          "start": 88.86,
+          "end": 89.14,
+          "probability": 0.9853265285491943
+        },
+        {
+          "word": " allow",
+          "start": 89.14,
+          "end": 89.42,
+          "probability": 0.9966614246368408
+        },
+        {
+          "word": " more",
+          "start": 89.42,
+          "end": 89.8,
+          "probability": 0.9909968376159668
+        },
+        {
+          "word": " migrants",
+          "start": 89.8,
+          "end": 90.22,
+          "probability": 0.986253559589386
+        },
+        {
+          "word": " in.",
+          "start": 90.22,
+          "end": 90.48,
+          "probability": 0.8739283084869385
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "start": 91.32,
+      "end": 94.72,
+      "text": "Does this all work when the US has to share the global spotlight with arrival?",
+      "words": [
+        {
+          "word": " Does",
+          "start": 91.32,
+          "end": 91.52,
+          "probability": 0.7022302150726318
+        },
+        {
+          "word": " this",
+          "start": 91.52,
+          "end": 91.7,
+          "probability": 0.9971454739570618
+        },
+        {
+          "word": " all",
+          "start": 91.7,
+          "end": 91.86,
+          "probability": 0.973530650138855
+        },
+        {
+          "word": " work",
+          "start": 91.86,
+          "end": 92.14,
+          "probability": 0.9996793270111084
+        },
+        {
+          "word": " when",
+          "start": 92.14,
+          "end": 92.34,
+          "probability": 0.9397263526916504
+        },
+        {
+          "word": " the",
+          "start": 92.34,
+          "end": 92.42,
+          "probability": 0.9873583316802979
+        },
+        {
+          "word": " US",
+          "start": 92.42,
+          "end": 92.64,
+          "probability": 0.9626622200012207
+        },
+        {
+          "word": " has",
+          "start": 92.64,
+          "end": 92.88,
+          "probability": 0.9939553141593933
+        },
+        {
+          "word": " to",
+          "start": 92.88,
+          "end": 93.04,
+          "probability": 0.9787725210189819
+        },
+        {
+          "word": " share",
+          "start": 93.04,
+          "end": 93.32,
+          "probability": 0.9885658621788025
+        },
+        {
+          "word": " the",
+          "start": 93.32,
+          "end": 93.46,
+          "probability": 0.97532719373703
+        },
+        {
+          "word": " global",
+          "start": 93.46,
+          "end": 93.64,
+          "probability": 0.966582179069519
+        },
+        {
+          "word": " spotlight",
+          "start": 93.64,
+          "end": 94.08,
+          "probability": 0.9895280003547668
+        },
+        {
+          "word": " with",
+          "start": 94.08,
+          "end": 94.3,
+          "probability": 0.9964654445648193
+        },
+        {
+          "word": " arrival?",
+          "start": 94.3,
+          "end": 94.72,
+          "probability": 0.4522550106048584
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "start": 95.6,
+      "end": 99.32,
+      "text": "And what happens if the American Empire stops working for the American people?",
+      "words": [
+        {
+          "word": " And",
+          "start": 95.6,
+          "end": 95.68,
+          "probability": 0.9333692789077759
+        },
+        {
+          "word": " what",
+          "start": 95.68,
+          "end": 95.8,
+          "probability": 0.9951412677764893
+        },
+        {
+          "word": " happens",
+          "start": 95.8,
+          "end": 96.14,
+          "probability": 0.9919477105140686
+        },
+        {
+          "word": " if",
+          "start": 96.14,
+          "end": 96.5,
+          "probability": 0.6983266472816467
+        },
+        {
+          "word": " the",
+          "start": 96.5,
+          "end": 96.62,
+          "probability": 0.9834218621253967
+        },
+        {
+          "word": " American",
+          "start": 96.62,
+          "end": 96.86,
+          "probability": 0.9945142269134521
+        },
+        {
+          "word": " Empire",
+          "start": 96.86,
+          "end": 97.24,
+          "probability": 0.8661177158355713
+        },
+        {
+          "word": " stops",
+          "start": 97.24,
+          "end": 97.7,
+          "probability": 0.9415261149406433
+        },
+        {
+          "word": " working",
+          "start": 97.7,
+          "end": 98.14,
+          "probability": 0.9983289837837219
+        },
+        {
+          "word": " for",
+          "start": 98.14,
+          "end": 98.42,
+          "probability": 0.9875786900520325
+        },
+        {
+          "word": " the",
+          "start": 98.42,
+          "end": 98.52,
+          "probability": 0.9960596561431885
+        },
+        {
+          "word": " American",
+          "start": 98.52,
+          "end": 98.88,
+          "probability": 0.9949012994766235
+        },
+        {
+          "word": " people?",
+          "start": 98.88,
+          "end": 99.32,
+          "probability": 0.98969966173172
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "start": 118.61999999999999,
+      "end": 120.02,
+      "text": "The United States is able to work for the American people.",
+      "words": [
+        {
+          "word": " The",
+          "start": 118.61999999999999,
+          "end": 120.02,
+          "probability": 0.004649751354008913
+        },
+        {
+          "word": " United",
+          "start": 120.02,
+          "end": 120.02,
+          "probability": 0.0004023940418846905
+        },
+        {
+          "word": " States",
+          "start": 120.02,
+          "end": 120.02,
+          "probability": 0.8361006379127502
+        },
+        {
+          "word": " is",
+          "start": 120.02,
+          "end": 120.02,
+          "probability": 0.08224888145923615
+        },
+        {
+          "word": " able",
+          "start": 120.02,
+          "end": 120.02,
+          "probability": 0.0021845842711627483
+        },
+        {
+          "word": " to",
+          "start": 120.02,
+          "end": 120.02,
+          "probability": 0.9869247674942017
+        },
+        {
+          "word": " work",
+          "start": 120.02,
+          "end": 120.02,
+          "probability": 0.00944551918655634
+        },
+        {
+          "word": " for",
+          "start": 120.02,
+          "end": 120.02,
+          "probability": 0.030855398625135422
+        },
+        {
+          "word": " the",
+          "start": 120.02,
+          "end": 120.02,
+          "probability": 0.40688082575798035
+        },
+        {
+          "word": " American",
+          "start": 120.02,
+          "end": 120.02,
+          "probability": 0.018601229414343834
+        },
+        {
+          "word": " people.",
+          "start": 120.02,
+          "end": 120.02,
+          "probability": 0.04223059117794037
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "language": "en",
+    "language_probability": 0.996037483215332
   }
-]
+}
