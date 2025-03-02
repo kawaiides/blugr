@@ -3,7 +3,7 @@ python-multipart>=0.0.7
 yt-dlp
 scikit-learn~=1.6.1
 pymongo==3.11
-boto3~=1.7.84
+boto3~=1.37.4
 anyio==3.7.1
 certifi==2023.7.22
 charset-normalizer==3.2.0
@@ -18,14 +18,14 @@ requests==2.31.0
 sniffio==1.3.0
 urllib3==2.0.5
 uvicorn>=0.12.0
-whispercpp @ git+https://github.com/stlukey/whispercpp.py@7af678159c29edb3bc2a51a72665073d58f2352f
 pydantic>=2.10.0
 annotated-types>=0.6.0
 typing_extensions>=4.12.2
 google~=3.0.0
-botocore~=1.10.84
+botocore~=1.37.4
 tqdm~=4.67.1
 ytnoti
-whispercpp~=1.0
 python-dotenv~=1.0.1
 protobuf~=5.29.3
+faster-whisper~=1.1.1
+google.generativeai
