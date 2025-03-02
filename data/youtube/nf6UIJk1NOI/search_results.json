@@ -1,20 +1,29 @@
 {
     "results": [
         {
-            "subheading": "Unmatched Financial Power",
+            "subheading": "Capital Movement and Currency",
             "matches": [
                 {
-                    "segment_id": 8,
-                    "start": 38.2,
-                    "end": 44.06,
-                    "text": "The US financial markets are the deepest, broadest, biggest markets in the world.",
-                    "score": 0.34362669812507757,
-                    "screenshot_path": "https://blooogerai.s3.amazonaws.com/screenshots/nf6UIJk1NOI/Unmatched_Financial_Power_0.png",
-                    "local_screenshot_path": "screenshots/Unmatched_Financial_Power_0.png"
+                    "segment_id": 5,
+                    "start": 28.400000000000002,
+                    "end": 29.38,
+                    "text": "Capital moved faster.",
+                    "score": 0.408248290463863,
+                    "screenshot_path": "https://blooogerai.s3.amazonaws.com/screenshots/nf6UIJk1NOI/Capital_Movement_and_Currency_0.png",
+                    "local_screenshot_path": "screenshots/Capital_Movement_and_Currency_0.png"
+                },
+                {
+                    "segment_id": 6,
+                    "start": 29.5,
+                    "end": 33.3,
+                    "text": "Once you get a dominant position in the currency, it's very difficult to lose it.",
+                    "score": 0.3162277660168379,
+                    "screenshot_path": "https://blooogerai.s3.amazonaws.com/screenshots/nf6UIJk1NOI/Capital_Movement_and_Currency_1.png",
+                    "local_screenshot_path": "screenshots/Capital_Movement_and_Currency_1.png"
                 }
             ],
-            "timestamp": "2025-03-01T17:41:04.851224",
-            "match_count": 1
+            "timestamp": "2025-03-02T04:20:10.424646",
+            "match_count": 2
         },
         {
             "subheading": "Immigration and Innovation",
@@ -28,74 +37,46 @@
                     "screenshot_path": null
                 }
             ],
-            "timestamp": "2025-03-01T17:41:04.851892",
+            "timestamp": "2025-03-02T04:20:10.425201",
             "match_count": 1
         },
         {
-            "subheading": "Risk-Taking Culture and Growth",
+            "subheading": "Resource Allocation and Global Influence",
             "matches": [
                 {
-                    "segment_id": 18,
-                    "start": 84.08,
-                    "end": 85.68,
-                    "text": "This is a culture of risk takers.",
-                    "score": 0.6666666666666669,
-                    "screenshot_path": "https://blooogerai.s3.amazonaws.com/screenshots/nf6UIJk1NOI/Risk-Taking_Culture_and_Growth_0.png",
-                    "local_screenshot_path": "screenshots/Risk-Taking_Culture_and_Growth_0.png"
-                },
-                {
-                    "segment_id": 19,
-                    "start": 86.1,
-                    "end": 90.48,
-                    "text": "One of the reasons that the US has stronger trend growth, we allow more migrants in.",
-                    "score": 0.23570226039551587,
-                    "screenshot_path": "https://blooogerai.s3.amazonaws.com/screenshots/nf6UIJk1NOI/Risk-Taking_Culture_and_Growth_1.png",
-                    "local_screenshot_path": "screenshots/Risk-Taking_Culture_and_Growth_1.png"
+                    "segment_id": 20,
+                    "start": 91.32,
+                    "end": 94.72,
+                    "text": "Does this all work when the US has to share the global spotlight with arrival?",
+                    "score": 0.4159149716574151,
+                    "screenshot_path": "https://blooogerai.s3.amazonaws.com/screenshots/nf6UIJk1NOI/Resource_Allocation_and_Global_Influence_0.png",
+                    "local_screenshot_path": "screenshots/Resource_Allocation_and_Global_Influence_0.png"
                 }
             ],
-            "timestamp": "2025-03-01T17:41:04.852369",
-            "match_count": 2
+            "timestamp": "2025-03-02T04:20:10.425706",
+            "match_count": 1
         },
         {
-            "subheading": "The Future of American Economic Power",
-            "matches": [
-                {
-                    "segment_id": 21,
-                    "start": 95.6,
-                    "end": 99.32,
-                    "text": "And what happens if the American Empire stops working for the American people?",
-                    "score": 0.628610968595841,
-                    "screenshot_path": "https://blooogerai.s3.amazonaws.com/screenshots/nf6UIJk1NOI/The_Future_of_American_Economic_Power_0.png",
-                    "local_screenshot_path": "screenshots/The_Future_of_American_Economic_Power_0.png"
-                },
-                {
-                    "segment_id": 22,
-                    "start": 118.61999999999999,
-                    "end": 120.02,
-                    "text": "The United States is able to work for the American people.",
-                    "score": 0.408248290463863,
-                    "screenshot_path": "https://blooogerai.s3.amazonaws.com/screenshots/nf6UIJk1NOI/The_Future_of_American_Economic_Power_1.png",
-                    "local_screenshot_path": "screenshots/The_Future_of_American_Economic_Power_1.png"
-                }
-            ],
-            "timestamp": "2025-03-01T17:41:04.852832",
-            "match_count": 2
+            "subheading": "Challenges and Sustainability",
+            "matches": [],
+            "timestamp": "2025-03-02T04:20:10.426351",
+            "match_count": 0
         }
     ],
     "metadata": {
         "total_subheadings": 4,
-        "total_matches": 6,
-        "processed_at": "2025-03-01T17:43:30.687009",
+        "total_matches": 4,
+        "processed_at": "2025-03-02T04:22:18.829647",
         "subheadings": [
-            "Unmatched Financial Power",
+            "Capital Movement and Currency",
             "Immigration and Innovation",
-            "Risk-Taking Culture and Growth",
-            "The Future of American Economic Power"
+            "Resource Allocation and Global Influence",
+            "Challenges and Sustainability"
         ],
         "statistics": {
-            "average_matches_per_subheading": 1.5,
-            "subheadings_with_matches": 4,
-            "coverage_percentage": 100.0
+            "average_matches_per_subheading": 1.0,
+            "subheadings_with_matches": 3,
+            "coverage_percentage": 75.0
         }
     }
 }
