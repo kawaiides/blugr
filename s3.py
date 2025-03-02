@@ -18,11 +18,14 @@ class S3CRUD:
 
         :param bucket_name: Name of the S3 bucket
         """
+        logger.info("Initializing S3 client")
+        logger.info(os.getenv('AWS_ACCESS_KEY_ID'))
         try:
             self.s3 = boto3.client(
                 's3',
                 aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-                aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
+                aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),
+                region_name='us-east-1'
             )
             self.bucket_name = bucket_name
         except Exception as e:
