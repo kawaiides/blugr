@@ -6,7 +6,7 @@ import logging
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(_name_)
+# logger = logging.getLogger(_name_)
 
 app = FastAPI()
 
@@ -25,7 +25,7 @@ class ProcessingResponse(BaseModel):
 @app.post("/process-video")
 async def process_video(request: VideoRequest):
     try:
-        logger.info(f"Processing video URL: {request.url}")
+        # logger.info(f"Processing video URL: {request.url}")
 
         # Process the video
         result = await process_youtube_url(request.url)
@@ -40,7 +40,7 @@ async def process_video(request: VideoRequest):
             raise HTTPException(status_code=500, message="Video processing failed")
 
     except Exception as e:
-        logger.error(f"Error processing video: {str(e)}")
+        # logger.error(f"Error processing video: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
