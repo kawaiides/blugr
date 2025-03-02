@@ -29,3 +29,4 @@ python-dotenv~=1.0.1
 protobuf~=5.29.3
 faster-whisper~=1.1.1
 google.generativeai
+browser-cookie3

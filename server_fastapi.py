@@ -37,7 +37,7 @@ async def process_video(request: VideoRequest):
                 content_id={request.url},
             )
         else:
-            raise HTTPException(status_code=500, message="Video processing failed")
+            raise HTTPException(status_code=500)
 
     except Exception as e:
         # logger.error(f"Error processing video: {str(e)}")
