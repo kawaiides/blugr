@@ -14,6 +14,7 @@ class Youtube():
         try:
             # Try Chrome first
             cookies = browser_cookie3.chrome(domain_name='.youtube.com')
+            cookies = browser_cookie3.brave(domain_name='.youtube.com')
         except:
             try:
                 # Try Firefox if Chrome fails
@@ -23,7 +24,7 @@ class Youtube():
                 cookies = None
 
         # Convert cookies to the format yt-dlp expects
-        self.cookiesfile = './youtube.com_cookies.txt'
+        self.cookiesfile = './cookies.txt'
         if cookies:
             with open(self.cookiesfile, 'w') as f:
                 for cookie in cookies:
