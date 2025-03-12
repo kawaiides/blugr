@@ -233,39 +233,39 @@ async def process_youtube_url(url, log_queue=None):
             os.makedirs(screenshots_dir, exist_ok=True)
 
             for result in search_results:
-                for idx, match in enumerate(result["matches"]):
-                    try:
-                        start_time = seconds_to_ffmpeg_timestamp(match["start"])
-                        screenshot_id = f"{result['subheading'].replace(' ', '_')}_{idx}"
+                match = result["matches"][0]
+                try:
+                    start_time = seconds_to_ffmpeg_timestamp(match["start"])
+                    screenshot_id = f"{result['subheading'].replace(' ', '_')}_0"
 
-                        log(f"Taking screenshot for timestamp {start_time} (ID: {screenshot_id})")
+                    log(f"Taking screenshot for timestamp {start_time} (ID: {screenshot_id})")
 
-                        yt.take_screenshot(
-                            video_path=video_path,
-                            timestamp=start_time,
-                            id=screenshot_id
-                        )
+                    yt.take_screenshot(
+                        video_path=video_path,
+                        timestamp=start_time,
+                        id=screenshot_id
+                    )
 
-                        local_screenshot_path = os.path.join(screenshots_dir, f"{screenshot_id}.png")
-                        s3_path = f"screenshots/{content_id}/{screenshot_id}.png"
+                    local_screenshot_path = os.path.join(screenshots_dir, f"{screenshot_id}.png")
+                    s3_path = f"screenshots/{content_id}/{screenshot_id}.png"
 
-                        # Upload to S3
-                        if os.path.exists(local_screenshot_path):
-                            log(f"Uploading screenshot to S3: {s3_path}")
-                            s3_handler.upload_file(local_screenshot_path, s3_path)
+                    # Upload to S3
+                    if os.path.exists(local_screenshot_path):
+                        log(f"Uploading screenshot to S3: {s3_path}")
+                        s3_handler.upload_file(local_screenshot_path, s3_path)
 
-                            # Update the match data with S3 URL
-                            s3_url = f"https://blooogerai.s3.amazonaws.com/{s3_path}"
-                            match["screenshot_path"] = s3_url
-                            match["local_screenshot_path"] = f"screenshots/{screenshot_id}.png"
-                            # Optionally remove local file after upload
-                            # os.remove(local_screenshot_path)
-                        else:
-                            log(f"Screenshot file not found: {local_screenshot_path}")
-                            match["screenshot_path"] = None
-                    except Exception as e:
-                        log(f"Error taking screenshot for {start_time}: {str(e)}")
+                        # Update the match data with S3 URL
+                        s3_url = f"https://blooogerai.s3.amazonaws.com/{s3_path}"
+                        match["screenshot_path"] = s3_url
+                        match["local_screenshot_path"] = f"screenshots/{screenshot_id}.png"
+                        # Optionally remove local file after upload
+                        # os.remove(local_screenshot_path)
+                    else:
+                        log(f"Screenshot file not found: {local_screenshot_path}")
                         match["screenshot_path"] = None
+                except Exception as e:
+                    log(f"Error taking screenshot for {start_time}: {str(e)}")
+                    match["screenshot_path"] = None
 
             # Calculate total matches
             total_matches = sum(result["match_count"] for result in search_results)
