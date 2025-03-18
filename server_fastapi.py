@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import asyncio
-from main import process_youtube_url
+from main import process_youtube_url, full_processing_pipeline
 from fastapi.middleware.cors import CORSMiddleware
 import time
 import aiofiles
@@ -9,6 +9,7 @@ from fastapi.responses import StreamingResponse
 from pathlib import Path
 from contextlib import asynccontextmanager
 import logging
+from typing import Optional
 
 app = FastAPI()
 
@@ -120,3 +121,20 @@ async def process_video(request: VideoRequest):
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
+
+class AffiliateRequest(BaseModel):
+    affiliate_url: str
+    key: Optional[str] = None
+
+@app.post("/process-affiliate")
+async def process_affiliate(request: AffiliateRequest):
+    try:
+        result = await full_processing_pipeline(request.affiliate_url, request.key)
+        return {
+            "status": "success",
+            "product_info": result['product_info'],
+            "videos_processed": result['videos_processed'],
+            "analysis": result['analysis']
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
