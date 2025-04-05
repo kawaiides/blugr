@@ -22,6 +22,8 @@ from fastapi.responses import JSONResponse
 from task_manager import task_manager
 from typing import Optional
 
+from youtube import Youtube
+
 app = FastAPI()
 
 app.add_middleware(
@@ -373,3 +375,37 @@ async def process_reel_script_task(task_id: str, prompt: str, reel_id: str, key:
     except Exception as e:
         task_manager.fail_task(task_id, str(e))
         logging.error(f"Reel creation task {task_id} failed: {str(e)}")
+
+class SearchYTRequest(BaseModel):
+    prompt: str
+    count: Optional[int] = 1
+
+async def _search_youtube(prompt: str, count: int = 1):
+    try:
+        yt = Youtube()
+        videos = yt.search_videos(prompt, max_results=count)
+        print(videos)
+        results = []
+        
+        for video in videos:
+            results.append({
+                "title": video.get("title", ""),
+                "url": video.get("url", ""),
+                "view_count": video.get("view_count", 0),
+                "duration": video.get("duration", 0)
+            })
+            
+        return {"results": results}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error searching YouTube: {str(e)}"
+        )
+
+@app.post("/search_yt")
+async def search_youtube(search_request: SearchYTRequest):
+    return await _search_youtube(search_request.prompt, search_request.count)
+
+@app.get("/search_yt")
+async def search_youtube_get(prompt: str, count: Optional[int] = 1):
+    return await _search_youtube(prompt, count)
