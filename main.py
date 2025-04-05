@@ -530,7 +530,7 @@ def get_mongo_client():
         print(f"MongoDB connection failed: {str(e)}")
         return None
 
-def save_to_mongodb(content_id, url, summary_data, reel=False, transcript_data=None, search_data=None, product_data=None, related_posts=None):
+def save_to_mongodb(content_id, url, summary_data, reel=False, transcript_data=None, search_data=None, product_data=None, related_posts=None, metadata=None):
     client = get_mongo_client()
     if not client:
         return False
@@ -539,6 +539,18 @@ def save_to_mongodb(content_id, url, summary_data, reel=False, transcript_data=N
         try:
             db = client['blugr']
             collection = db['reels']
+
+            # Base metadata
+            base_metadata = {
+                "created_at": datetime.utcnow(),
+                "status": "completed",
+                "version": "1.0",
+                "has_search_results": bool(search_data)
+            }
+            
+            # Update with custom metadata if provided
+            if metadata:
+                base_metadata.update(metadata)
 
             document = {
                 "content_id": content_id,
@@ -553,12 +565,7 @@ def save_to_mongodb(content_id, url, summary_data, reel=False, transcript_data=N
                     "parsed_summary": summary_data["parsed_summary"]
                 },
                 "search_results": search_data if search_data else [],
-                "metadata": {
-                    "created_at": datetime.utcnow(),
-                    "status": "completed",
-                    "version": "1.0",
-                    "has_search_results": bool(search_data)
-                },
+                "metadata": base_metadata,
                 "product_data": product_data if product_data else [],
                 "related_posts": related_posts if related_posts else [],
             }
@@ -584,6 +591,18 @@ def save_to_mongodb(content_id, url, summary_data, reel=False, transcript_data=N
             db = client['blugr']
             collection = db['generated-texts']
 
+            # Base metadata
+            base_metadata = {
+                "created_at": datetime.utcnow(),
+                "status": "completed",
+                "version": "1.0",
+                "has_search_results": bool(search_data)
+            }
+            
+            # Update with custom metadata if provided
+            if metadata:
+                base_metadata.update(metadata)
+
             document = {
                 "content_id": content_id,
                 "url": url,
@@ -597,12 +616,7 @@ def save_to_mongodb(content_id, url, summary_data, reel=False, transcript_data=N
                     "parsed_summary": summary_data["parsed_summary"]
                 },
                 "search_results": search_data if search_data else [],
-                "metadata": {
-                    "created_at": datetime.utcnow(),
-                    "status": "completed",
-                    "version": "1.0",
-                    "has_search_results": bool(search_data)
-                },
+                "metadata": base_metadata,
                 "product_data": product_data if product_data else [],
                 "related_posts": related_posts if related_posts else [],
             }
@@ -949,12 +963,16 @@ async def process_youtube_url(url, product_data=None, related_posts=None, log_qu
                 except json.JSONDecodeError:
                     log("Corrupt summary file, regenerating...")
                     # Regenerate logic here
+                    response = await generate_text(transcript_result['transcription'], blog_prompt)
+                    summary_response = response
+                    with open(summary_path, "w", encoding='utf-8') as f:
+                        json.dump(summary_response, f, indent=4)
         else:
             log("Generating summary using Gemini API...")
             response = await generate_text(transcript_result['transcription'], blog_prompt)
             summary_response = response
             log("Writing summary to file...")
-            with open(f"{base_path}/summary.json", "w", encoding='utf-8') as f:
+            with open(summary_path, "w", encoding='utf-8') as f:
                 json.dump(summary_response, f, indent=4)
 
         # Parse the summary JSON
@@ -1592,6 +1610,286 @@ async def make_clips(reel_id, product_info=None, log_queue=None):
         'videos_processed': len(top_videos),
         'analysis': response
     }
+
+async def process_local_video(file_path, content_id, title=None, task_id=None):
+    """
+    Process a local MP4 video file similar to process_youtube_url function
+    
+    Args:
+        file_path: Path to the local MP4 file
+        content_id: Unique identifier for this content
+        title: Optional title for the video
+        task_id: Optional task ID for logging
+    """
+    log_queue = None
+    client = get_mongo_client()
+    if not client:
+        return False
+    db = client['blugr']
+    collection = db['generated-texts']
+    
+    # Check if already processed
+    exists = collection.find_one({'content_id': content_id})
+    if exists:
+        return content_id
+
+    def log(message):
+        if log_queue:
+            log_queue.write(message)
+        print(message)
+        if task_id:
+            update_task_progress(task_id, message)
+
+    try:
+        log("Processing local video file...")
+        
+        # Create directory structure similar to YouTube downloads
+        base_path = f"./data/uploads/{content_id}"
+        os.makedirs(base_path, exist_ok=True)
+        
+        video_path = file_path
+        audio_filename = f"{base_path}/audio.mp3"
+        
+        # Extract audio from video
+        log("Extracting audio from video...")
+        extract_audio_cmd = [
+            'ffmpeg', '-i', video_path, 
+            '-vn', '-ar', '44100', '-ac', '2', '-ab', '192k', '-f', 'mp3',
+            audio_filename
+        ]
+        subprocess.run(extract_audio_cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        # Get video length
+        probe_cmd = ['ffprobe', '-v', 'error', '-show_entries', 'format=duration', 
+                     '-of', 'default=noprint_wrappers=1:nokey=1', video_path]
+        length = float(subprocess.check_output(probe_cmd).decode('utf-8').strip())
+        
+        log(f"Extracted audio: {audio_filename}")
+        
+        log("Transcribing audio...")
+        transcript_file = f"{base_path}/transcript.json"
+        
+        # Handle transcription
+        if os.path.exists(transcript_file):
+            with open(transcript_file, 'r', encoding='utf-8') as file:
+                transcript_result = json.load(file)
+            if "transcription" not in transcript_result:
+                transcript_result["transcription"] = " ".join([seg["text"] for seg in transcript_result["segments"]])
+            transcript_data = {
+                "full_text": transcript_result["transcription"],
+                "segments": transcript_result["segments"],
+                "metadata": transcript_result.get("metadata", {})
+            }
+        else:
+            # Generate new transcript
+            transcript_result = transcribe(audio_filename, log_queue)
+            transcript_data = {
+                "full_text": transcript_result["transcription"],
+                "segments": transcript_result["segments"],
+                "metadata": {
+                    "language": transcript_result["language"],
+                    "language_probability": transcript_result["language_probability"]
+                }
+            }
+            # Save transcript data
+            with open(transcript_file, 'w', encoding='utf-8') as f:
+                json.dump(transcript_result, f, indent=4)
+            # Save plain text transcript
+            with open(f"{base_path}/transcript.txt", 'w', encoding='utf-8') as f:
+                f.write(transcript_result["transcription"])
+            # Save subtitles
+            srt_content = generate_srt(transcript_result["segments"])
+            with open(f"{base_path}/subtitles.srt", 'w', encoding='utf-8') as f:
+                f.write(srt_content)
+
+        log(f"Transcript saved: {base_path}/transcript.txt")
+        log(f"Detailed transcription saved: {base_path}/transcript.json")
+        log(f"Subtitles saved: {base_path}/subtitles.srt")
+
+        # Generate/load summary
+        summary_path = f"{base_path}/summary.json"
+        if os.path.exists(summary_path) and os.path.getsize(summary_path) > 0:
+            with open(summary_path, 'r', encoding='utf-8') as f:
+                try:
+                    log("Opening existing summary file...")
+                    summary_response = json.load(f)
+                except json.JSONDecodeError:
+                    log("Corrupt summary file, regenerating...")
+                    # Regenerate logic here
+                    response = await generate_text(transcript_result['transcription'], blog_prompt)
+                    summary_response = response
+                    with open(summary_path, "w", encoding='utf-8') as f:
+                        json.dump(summary_response, f, indent=4)
+        else:
+            log("Generating summary using Gemini API...")
+            response = await generate_text(transcript_result['transcription'], blog_prompt)
+            summary_response = response
+            log("Writing summary to file...")
+            with open(summary_path, "w", encoding='utf-8') as f:
+                json.dump(summary_response, f, indent=4)
+
+        # Parse the summary JSON
+        try:
+            summary_json = summary_response["generated_text"]
+        except json.JSONDecodeError as e:
+            log(f"Warning: Could not parse summary JSON: {e}")
+            summary_json = {}
+
+        # Process subheadings and perform TF-IDF analysis
+        subheadings = [item["h2"] for item in summary_json.get("body", [])]
+        documents = [segment["text"] for segment in transcript_result["segments"]]
+        
+        log("Performing TF-IDF analysis and search...")
+        search_results = tf_idf(summary_json, transcript_result)
+        
+        try:
+            log("Generating screenshots for search results...")
+            screenshots_dir = os.path.join(base_path, 'screenshots')
+            os.makedirs(screenshots_dir, exist_ok=True)
+
+            # Take screenshots at key points
+            for idx, result in enumerate(search_results):
+                if result["matches"]:
+                    for match in result["matches"]:
+                        segment_idx = match["segment_idx"]
+                        if segment_idx < len(transcript_result["segments"]):
+                            segment = transcript_result["segments"][segment_idx]
+                            timestamp = segment["start"]
+                            screenshot_path = os.path.join(screenshots_dir, f"screenshot_{idx}_{segment_idx}.png")
+                            
+                            # Use ffmpeg to take screenshot
+                            screenshot_cmd = [
+                                'ffmpeg', 
+                                '-ss', str(timestamp), 
+                                '-i', video_path,
+                                '-vframes', '1',
+                                '-q:v', '2',
+                                screenshot_path
+                            ]
+                            subprocess.run(screenshot_cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            
+            # Calculate total matches
+            total_matches = sum(result["match_count"] for result in search_results)
+
+            # Prepare search data structure
+            search_data = {
+                "results": search_results,
+                "metadata": {
+                    "total_subheadings": len(subheadings),
+                    "total_matches": total_matches,
+                    "processed_at": datetime.utcnow().isoformat(),
+                    "subheadings": subheadings,
+                    "statistics": {
+                        "average_matches_per_subheading": total_matches / len(subheadings) if subheadings else 0,
+                        "subheadings_with_matches": sum(1 for result in search_results if result["matches"]),
+                        "coverage_percentage": (sum(1 for result in search_results if result["matches"]) / len(
+                            subheadings)) * 100 if subheadings else 0
+                    }
+                }
+            }
+
+            # Save search results locally
+            log("Writing search results to file...")
+            with open(f"{base_path}/search_results.json", 'w', encoding='utf-8') as file:
+                json.dump(search_data, file, indent=4)
+
+        except Exception as e:
+            log(f"Warning: Error in search processing: {str(e)}")
+            search_data = {
+                "results": [],
+                "metadata": {
+                    "total_subheadings": len(subheadings) if 'subheadings' in locals() else 0,
+                    "total_matches": 0,
+                    "processed_at": datetime.utcnow().isoformat(),
+                    "subheadings": subheadings if 'subheadings' in locals() else [],
+                    "error": str(e)
+                }
+            }
+
+        summary_data = {
+            "raw_response": summary_response["generated_text"],
+            "parsed_summary": summary_json
+        }
+
+        # Save to MongoDB
+        log("Saving to MongoDB...")
+        mongodb_success = save_to_mongodb(
+            content_id=content_id,
+            url=f"local_upload:{title or 'Uploaded Video'}",
+            transcript_data=transcript_data if transcript_data else None,
+            summary_data=summary_data,
+            search_data=search_data,
+            product_data=None,
+            related_posts=None,
+            metadata={
+                "source_type": "local_upload",
+                "title": title or "Uploaded Video",
+                "upload_time": datetime.utcnow().isoformat()
+            }
+        )
+        
+        if mongodb_success:
+            log("Successfully saved to MongoDB")
+        else:
+            log("Failed to save to MongoDB")
+
+        log("Processing completed successfully")
+        return content_id
+
+    except Exception as e:
+        log(f"Error processing local video file: {str(e)}")
+        return False
+
+def update_task_progress(task_id, message):
+    """Update task progress in the task manager"""
+    try:
+        from task_manager import task_manager
+        task = task_manager.active_tasks.get(task_id)
+        if task:
+            # Try to extract progress percentage if message contains it
+            progress_indicators = ["Transcribing", "Generating", "Performing", "Writing", "Saving"]
+            
+            # Update progress based on processing stage
+            if "Transcribing" in message:
+                task["progress"] = 20
+            elif "Generating summary" in message:
+                task["progress"] = 40
+            elif "Performing TF-IDF" in message:
+                task["progress"] = 60
+            elif "Generating screenshots" in message:
+                task["progress"] = 80
+            elif "Processing completed" in message:
+                task["progress"] = 100
+                
+            task["status_message"] = message
+    except Exception:
+        pass
+
+def generate_srt(segments):
+    """
+    Generate SRT subtitle content from segments
+    
+    Args:
+        segments: List of segments with start, end, and text
+    
+    Returns:
+        String containing SRT format subtitles
+    """
+    def format_time(seconds):
+        hours = int(seconds // 3600)
+        minutes = int((seconds % 3600) // 60)
+        seconds = seconds % 60
+        milliseconds = int((seconds - int(seconds)) * 1000)
+        return f"{hours:02d}:{minutes:02d}:{int(seconds):02d},{milliseconds:03d}"
+    
+    srt_content = []
+    for i, segment in enumerate(segments, 1):
+        srt_content.append(f"{i}")
+        srt_content.append(f"{format_time(segment['start'])} --> {format_time(segment['end'])}")
+        srt_content.append(f"{segment['text']}")
+        srt_content.append("")  # Empty line between entries
+    
+    return "\n".join(srt_content)
 
 if __name__ == "__main__":
     url = input("Enter YouTube URL: ")

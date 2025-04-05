@@ -16,13 +16,16 @@ from typing import Dict
 import os
 import psutil
 
-from fastapi import  status
+from fastapi import  status, UploadFile, File, Form
 from fastapi.requests import Request
 from fastapi.responses import JSONResponse
 from task_manager import task_manager
 from typing import Optional
 
 from youtube import Youtube
+
+# Import the new function we'll create
+from main import process_local_video
 
 app = FastAPI()
 
@@ -89,6 +92,12 @@ async def lifespan(app: FastAPI):
             ]
         )
         logging.info("Application started")
+        
+        # Create uploads directory if it doesn't exist
+        uploads_dir = Path('./data/uploads')
+        if not uploads_dir.exists():
+            uploads_dir.mkdir(parents=True, exist_ok=True)
+            logging.info("Created uploads directory")
         
     except Exception as e:
         logging.error(f"Failed to initialize logging: {str(e)}")
@@ -402,10 +411,78 @@ async def _search_youtube(prompt: str, count: int = 1):
             detail=f"Error searching YouTube: {str(e)}"
         )
 
-@app.post("/search_yt")
-async def search_youtube(search_request: SearchYTRequest):
-    return await _search_youtube(search_request.prompt, search_request.count)
-
 @app.get("/search_yt")
 async def search_youtube_get(prompt: str, count: Optional[int] = 1):
     return await _search_youtube(prompt, count)
+
+@app.post("/upload-video")
+@limiter.limit("5/minute")
+async def upload_process_video(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    file: UploadFile = File(...),
+    title: str = Form(None)
+):
+    if not file.filename.endswith('.mp4'):
+        return JSONResponse(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            content={"detail": "Only MP4 files are supported"}
+        )
+    
+    try:
+        task_id = str(uuid4())
+        content_id = str(uuid4())
+        
+        # Create directory for the uploaded file
+        upload_dir = f"./data/uploads/{content_id}"
+        os.makedirs(upload_dir, exist_ok=True)
+        
+        # Save the uploaded file
+        file_path = f"{upload_dir}/video.mp4"
+        with open(file_path, "wb") as buffer:
+            buffer.write(await file.read())
+        
+        try:
+            task_manager.create_task(task_id, f"Processing uploaded video: {file.filename}")
+        except HTTPException as he:
+            return JSONResponse(
+                status_code=he.status_code,
+                content={"detail": he.detail}
+            )
+
+        # Start processing in background
+        background_tasks.add_task(
+            process_video_upload_task,
+            task_id,
+            content_id,
+            file_path,
+            title or file.filename
+        )
+
+        return JSONResponse(
+            status_code=status.HTTP_202_ACCEPTED,
+            content={
+                "task_id": task_id,
+                "content_id": content_id,
+                "status_url": f"/task-status/{task_id}",
+                "monitor_url": "/system-status"
+            }
+        )
+
+    except Exception as e:
+        logging.error(f"Critical error: {str(e)}")
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"detail": "Internal server error"}
+        )
+
+async def process_video_upload_task(task_id: str, content_id: str, file_path: str, title: str):
+    try:
+        result_content_id = await process_local_video(file_path, content_id, title, task_id)
+        if result_content_id:
+            task_manager.complete_task(task_id, { 'content_id': result_content_id })
+        else:
+            task_manager.fail_task(task_id, "Failed to process video")
+    except Exception as e:
+        task_manager.fail_task(task_id, str(e))
+        logging.error(f"Task {task_id} failed: {str(e)}")
