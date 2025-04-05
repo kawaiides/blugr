@@ -44,6 +44,8 @@ venv\Scripts\activate
 
 ```bash
 pip install -r requirements.txt
+brew install ffmpeg
+brew install espeak-ng
 ```
 
 > **Compatibility Notes**:
