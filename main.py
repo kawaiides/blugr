@@ -236,7 +236,7 @@ async def create_final_reel(reel_id: str, base_dir: str = "data/reel") -> None:
         # Load summary.json to get subheadings
         with open(os.path.join(reel_dir, "summary.json")) as f:
             summary = json.load(f)
-            summary_data = json.loads(summary["generated_text"])
+            summary_data = summary["generated_text"]
             subheadings = [re.sub(r'[^\w\-_\. ]', '',section["Subheading"].replace(' ', '_')).replace(" ", "_").replace("__", "_") for section in summary_data[0]["body"]]
             print(subheadings)
         # Combine all narrations
@@ -1345,7 +1345,7 @@ async def make_reel(prompt, reel_id, key=None, product_info=None, log_queue=None
 
     # Parse the summary JSON
     try:
-        summary_json = json.loads(summary_response["generated_text"])
+        summary_json = summary_response["generated_text"]
     except json.JSONDecodeError as e:
         log(f"Warning: Could not parse summary JSON: {e}")
         summary_json = {

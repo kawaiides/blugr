@@ -27,19 +27,33 @@ class Youtube():
             filename_base = f"./data/youtube/{videoinfo['id']}/audio"
             
             # More flexible format selection
+            # options = {
+            #     'format': 'bestaudio/best',
+            #     'postprocessors': [{
+            #         'key': 'FFmpegExtractAudio',
+            #         'preferredcodec': 'mp3',
+            #         'preferredquality': '192',
+            #     }],
+            #     'outtmpl': filename_base,
+            #     'cookiefile': self.cookiesfile,
+            #     'force_generic_extractor': True,  # Bypass age restrictions
+            #     'format_sort': ['ext:mp3', 'm4a', 'aac'],  # Prioritize direct audio formats
+            #     'postprocessor_args': ['-ar', '44100'],  # Standard sampling rate
+            #     'verbose': True  # For debugging
+            # }
+
             options = {
-                'format': 'bestaudio/best',
+                'outtmpl': filename_base,
+                'format': '233/234/bestaudio/best',
+                'merge_output_format': 'mp3',
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
                     'preferredquality': '192',
                 }],
-                'outtmpl': filename_base,
                 'cookiefile': self.cookiesfile,
-                'force_generic_extractor': True,  # Bypass age restrictions
-                'format_sort': ['ext:mp3', 'm4a', 'aac'],  # Prioritize direct audio formats
-                'postprocessor_args': ['-ar', '44100'],  # Standard sampling rate
-                'verbose': True  # For debugging
+                'ignoreerrors': True,
+                'force_generic_extractor': True,
             }
 
             # Attempt download with fallback
@@ -66,9 +80,19 @@ class Youtube():
         filename = f"./data/youtube/{videoinfo['id']}/video.mp4"
         ydl_opts = {
             'outtmpl': filename,
-            'format': 'bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+            'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
             'cookiefile': self.cookiesfile,
+            'merge_output_format': 'mp4',  # Ensures compatibility
+            'postprocessors': [{
+                'key': 'FFmpegVideoConvertor',
+                'preferedformat': 'mp4',  # fallback
+            }],
         }
+        # ydl_opts = {
+        #     'outtmpl': filename,
+        #     'format': 'bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+        #     'cookiefile': self.cookiesfile,
+        # }
         if length <= 60*30:
             with YoutubeDL(ydl_opts) as ydl:
                 ydl.download([url])

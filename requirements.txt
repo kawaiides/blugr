@@ -32,4 +32,6 @@ google.generativeai
 browser-cookie3
 selectorlib
 bs4
+moviepy
+opencv-python
 git+https://github.com/coqui-ai/TTS.git

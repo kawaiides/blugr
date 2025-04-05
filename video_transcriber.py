@@ -4,6 +4,7 @@ import cv2
 from moviepy import ImageSequenceClip, AudioFileClip, VideoFileClip
 from tqdm import tqdm
 from whisper_wrapper import WhisperTranscriber
+import numpy as np
 
 FONT = cv2.FONT_HERSHEY_SIMPLEX
 FONT_SCALE = 0.8
@@ -200,9 +201,14 @@ class VideoTranscriber:
             blended = (region * (1 - alpha) + scaled_frame * alpha).astype(np.uint8)
             blurred[y_offset:y_offset+h, x_offset:x_offset+w] = blended
             
-            # Add subtitles to the blurred composite frame
-            composite_frame = self.draw_text_with_background(blurred, i[0])
+            # Add subtitle if it matches the frame number
+            subtitle_text = ""
+            for line in self.text_array:
+                if line[1] <= N_frames <= line[2]:
+                    subtitle_text = line[0]
+                    break
 
+            composite_frame = self.draw_text_with_background(blurred, subtitle_text)
             cv2.imwrite(os.path.join(output_folder, f"{N_frames}.jpg"), composite_frame)
             N_frames += 1
 

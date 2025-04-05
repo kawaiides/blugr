@@ -68,7 +68,7 @@ REGION_NAME=your_aws_region
 ### Starting the Server
 
 ```bash
-uvicorn main:app --reload
+uvicorn server_fastapi:app --reload
 ```
 
 This will start the server at `http://localhost:8000`
