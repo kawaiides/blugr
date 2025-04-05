@@ -321,7 +321,13 @@ async def create_reel(
 
 async def process_reel_task(task_id: str, prompt: str, reel_id: str, key: str = None):
     try:
+        import cProfile
+        profiler = cProfile.Profile()
+        profiler.enable()
         result = await make_reel(prompt, reel_id, key)
+        profiler.disable()
+        profiler.dump_stats(f"profile_v1.prof")  # Per video profile file
+        print(f"FinishedProfiling...")
         task_manager.complete_task(task_id, {
             'content_id': result['content_id'],
             'videos_processed': result['videos_processed'],
