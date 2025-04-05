@@ -17,21 +17,47 @@ class Youtube():
             'extract_flat': True,
         }
 
+    
     @with_tqdm
     def download_audio_from_url(self, url):
         print("Downloading audio...")
-        videoinfo = YoutubeDL({'cookiefile': self.cookiesfile}).extract_info(url=url, download=False)
-        length = videoinfo['duration']
-        filename = f"./data/youtube/{videoinfo['id']}/audio.mp3"
-        options = {
-            'format': 'bestaudio/best',
-            'keepvideo': False,
-            'outtmpl': filename,
-            'cookiefile': self.cookiesfile,
-        }
-        with YoutubeDL(options) as ydl:
-            ydl.download([videoinfo['webpage_url']])
-        return filename, length
+        try:
+            videoinfo = YoutubeDL({'cookiefile': self.cookiesfile}).extract_info(url=url, download=False)
+            length = videoinfo['duration']
+            filename_base = f"./data/youtube/{videoinfo['id']}/audio"
+            
+            # More flexible format selection
+            options = {
+                'format': 'bestaudio/best',
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+                }],
+                'outtmpl': filename_base,
+                'cookiefile': self.cookiesfile,
+                'force_generic_extractor': True,  # Bypass age restrictions
+                'format_sort': ['ext:mp3', 'm4a', 'aac'],  # Prioritize direct audio formats
+                'postprocessor_args': ['-ar', '44100'],  # Standard sampling rate
+                'verbose': True  # For debugging
+            }
+
+            # Attempt download with fallback
+            with YoutubeDL(options) as ydl:
+                try:
+                    ydl.download([url])
+                except Exception as e:
+                    print(f"Primary download failed: {e}")
+                    # Fallback to video format extraction
+                    options['format'] = 'bestvideo[ext=mp4]+bestaudio/best'
+                    ydl.params.update(options)
+                    ydl.download([url])
+
+            return f"{filename_base}.mp3", length
+
+        except Exception as e:
+            print(f"Final download failure: {e}")
+            raise RuntimeError(f"Could not download audio: {str(e)}")
 
     @with_tqdm
     def download_video(self, url):
@@ -43,9 +69,10 @@ class Youtube():
             'format': 'bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
             'cookiefile': self.cookiesfile,
         }
-        with YoutubeDL(ydl_opts) as ydl:
-            ydl.download([url])
-        return filename, length
+        if length <= 60*30:
+            with YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
+            return filename, length
 
     @with_tqdm
     def get_most_replayed(self, url):
@@ -107,6 +134,60 @@ class Youtube():
             print(f"An error occurred while taking the screenshot: {e.stderr.decode()}")
         except FileNotFoundError:
             print("FFmpeg is not installed or not found in the PATH.")
+    
+    @timeout(120)
+    def save_video_clip(self, video_path, output_dir, start_time, end_time, clip_id):
+        """
+        Save a video clip from a source video between specified timestamps.
+        
+        Args:
+            video_path (str): Full path to the input video file.
+            output_dir (str): Directory to save the output clip.
+            start_time (str): Start timestamp (e.g., "00:01:23").
+            end_time (str): End timestamp (e.g., "00:02:45").
+            clip_id (str/num): Unique identifier for the output filename.
+        """
+        try:
+            if not os.path.exists(output_dir):
+                os.makedirs(output_dir)
+                print(f"Folder '{output_dir}' created successfully.")
+            else:
+                print(f"Folder '{output_dir}' already exists.")
+        except OSError as error:
+            print(f"Error creating folder '{output_dir}': {error}")
+            return
+
+        output_path = os.path.join(output_dir, f"{clip_id}.mp4")
+        command = [
+            'ffmpeg',
+            '-y',  # Overwrite output file if it exists
+            '-i', video_path,
+            '-ss', start_time,
+            '-to', end_time,
+            '-c:v', 'libx264',  # H.264 video codec
+            '-c:a', 'aac',      # AAC audio codec
+            '-preset', 'fast',  # Speed/quality tradeoff
+            '-crf', '23',       # Quality level (0-51, lower is better)
+            output_path
+        ]
+        
+        try:
+            subprocess.run(
+                command, 
+                check=True, 
+                stdout=subprocess.PIPE, 
+                stderr=subprocess.PIPE
+            )
+            print(f"Video clip saved at {output_path}")
+        except subprocess.CalledProcessError as e:
+            error_message = e.stderr.decode()
+            print(f"Error saving video clip: {error_message}")
+            if "Invalid duration" in error_message:
+                print("Possible cause: End time is before start time")
+            elif "Invalid argument" in error_message:
+                print("Possible cause: Invalid timestamp format (use HH:MM:SS)")
+        except FileNotFoundError:
+            print("FFmpeg is not installed or not found in the PATH.")
 
     @timeout(120)
     def make_gif_most_viewed(self, video_path, start, duration):
@@ -134,6 +215,7 @@ class Youtube():
     @timeout(120)
     def search_videos(self, product_name, max_results=5):
         """Search YouTube videos using yt-dlp and return top most viewed long-form videos (excluding Shorts)"""
+        print(f"searching for {product_name}")
         try:
             videos = []
             search_query = f"ytsearch20:{product_name}"  # Get 20 results to find top viewed
@@ -152,6 +234,8 @@ class Youtube():
                             duration = info.get('duration', 0)
                             # Skip videos with duration <=60 seconds (Shorts)
                             if duration <= 60:
+                                continue
+                            if duration >= 60*30:
                                 continue
                             detailed_videos.append({
                                 'url': entry['url'],

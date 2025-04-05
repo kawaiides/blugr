@@ -45,3 +45,132 @@ affiliate_prompt = """
 
         Output JSON
 """
+
+reel_prompt = """
+        [INST] You are tasked to write the scripts to a viral youtube reels, given the prompt, write a script that satitesfies the prompt.
+        Include a witty and catchy Title for the script.
+        Include a caption for the reel script.
+        Include 5 categories and 5 keywords for the Script.
+
+        You are given the transcripts of a few youtube videos.
+        
+        RELY HEAVILY ON THE TRANSCRIPT FOR THE CONTENT. TRY TO ADD REFERENCES TO THE TRANSCRIPT.
+        The reel script should be atleast 4 to 5 Subheadings and 4 to 5 corresponding paragraphs.
+        Subheadings should be descriptive of corresponding paragraphs, this will be used as key to do tfidf search over the transcripts to find timestamps
+
+        EACH SCRIPT SHOULD BE LONG ENOUGH TO READ FOR ONE MINUTE
+
+        Refrain from using "Summary" or "Youtube" in the blog_desc. blog_desc should be a brief description atleast of the whole transcript, atleast 50 words.
+        Refrain from using "Transcript" or "Summary" or "Youtube" or "Video" or "video" or "Speaker".
+        
+        WRITE A SCRIPT FOR REELS, Each reel should have the format:
+        [
+            {
+                "title": str,
+                "caption": str,
+                "keywords": List[str],
+                "categories": List[str],
+                "body": [
+                    ...4 such elements,
+                    , {
+                        "Subheading": str, //Subheading should be descriptive of the paragraph, this will be used as key to do tfidf search over the transcripts to find timestamps
+                        "Paragrah": str, //the script of the reel, this will be read out in the video, this should be the narrators voice, and should be continuous and coherent
+                    }
+                ]
+            }
+        ]
+        The first Two subheadings should be fast paced and appealing, intruiging curiosity, so the viewer is hooked.
+        Follow popular youtube shorts intros.
+        The Paragraph will be read out by a narrator sequentially, so it should be meaningful spoken english and should represent the content of the reel's audio.
+        Ask for Subscriptions or likes at the end of the script, should be in the last Paragraph.
+
+        Output JSON
+"""
+
+reel_prompt = """
+        [INST] You are tasked to write the scripts to a viral youtube reels, given the prompt, write a script that satitesfies the prompt.
+        Include a witty and catchy Title for the script.
+        Include a caption for the reel script.
+        Include 5 categories and 5 keywords for the Script.
+
+        You are given the transcripts of a few youtube videos.
+        
+        RELY HEAVILY ON THE TRANSCRIPT FOR THE CONTENT. TRY TO ADD REFERENCES TO THE TRANSCRIPT.
+        The reel script should be atleast 4 to 5 Subheadings and 4 to 5 corresponding paragraphs.
+        Subheadings should be descriptive of corresponding paragraphs, this will be used as key to do tfidf search over the transcripts to find timestamps
+
+        EACH SCRIPT SHOULD BE LONG ENOUGH TO READ FOR ONE MINUTE
+
+        Refrain from using "Summary" or "Youtube" in the blog_desc. blog_desc should be a brief description atleast of the whole transcript, atleast 50 words.
+        Refrain from using "Transcript" or "Summary" or "Youtube" or "Video" or "video" or "Speaker".
+        
+        WRITE A SCRIPT FOR REELS, Each reel should have the format:
+        [
+            {
+                "title": str,
+                "caption": str,
+                "keywords": List[str],
+                "categories": List[str],
+                "body": [
+                    ...4 such elements,
+                    , {
+                        "Subheading": str, //Subheading should be descriptive of the paragraph, this will be used as key to do tfidf search over the transcripts to find timestamps
+                        "keyword": str, //keyword to use to search for videos on youtube, make it a crist 2-3 word keyword that can fetch a good footage for the reel from a youtube search
+                        "Paragraph": str, //the script of the reel, this will be read out in the video, this should be the narrators voice, and should be continuous and coherent
+                    }
+                ]
+            }
+        ]
+        The first Two subheadings should be fast paced and appealing, intruiging curiosity, so the viewer is hooked.
+        Follow popular youtube shorts intros.
+        The Paragraph will be read out by a narrator sequentially, so it should be meaningful spoken english and should represent the content of the reel's audio.
+        Ask for Subscriptions or likes at the end of the script, should be in the last Paragraph.
+        keyword to use to search for videos on youtube, make it a crist 2-3 word keyword that can fetch a good footage for the reel from a youtube search
+        Make sure you Oupt an Array
+        Output JSON
+        No Extra Characters
+"""
+
+reel_script_prompt = """"
+    [INST] You are tasked to write the scripts to a viral youtube/instagram reel, given the prompt, write a script that satitesfies the prompt.
+        Include a witty and catchy Title for the script.
+        Include a caption for the reel script.
+        Include 5 categories and 5 keywords for the Script.
+
+        You are given the transcripts of a few youtube videos.
+        
+        RELY HEAVILY ON THE TRANSCRIPT FOR THE CONTENT. TRY TO ADD REFERENCES TO THE TRANSCRIPT.
+        The reel script should be atleast 4 to 5 Subheadings and 4 to 5 corresponding paragraphs.
+        Subheadings should be descriptive of corresponding paragraphs, this will be used as key to do tfidf search over the transcripts to find timestamps
+
+        EACH SCRIPT SHOULD BE LONG ENOUGH TO READ FOR ONE MINUTE
+
+        Refrain from using "Summary" or "Youtube" in the blog_desc. blog_desc should be a brief description atleast of the whole transcript, atleast 50 words.
+        Refrain from using "Transcript" or "Summary" or "Youtube" or "Video" or "video" or "Speaker".
+        
+        WRITE A SCRIPT FOR REELS, Each reel should have the format:
+        [
+            {
+                "title": str,
+                "caption": str,
+                "keywords": List[str],
+                "categories": List[str],
+                "body": [
+                    ...4 such elements,
+                    , {
+                        "Subheading": str, //Subheading should be descriptive of the paragraph, this will be used as key to do tfidf search over the transcripts to find timestamps
+                        "keyword": str, //keyword to use to search for videos on youtube, make it a crist 2-3 word keyword that can fetch a good footage for the reel from a youtube search
+                        "Paragraph": str, //the script of the reel, this will be read out in the video, this should be the narrators voice, and should be continuous and coherent
+                    }
+                ]
+            }
+        ]
+        The first Two subheadings should be fast paced and appealing, intruiging curiosity, so the viewer is hooked.
+        Follow popular youtube shorts intros.
+        The Paragraph will be read out by a narrator sequentially, so it should be meaningful spoken english and should represent the content of the reel's audio.
+        Ask for Subscriptions or likes at the end of the script, should be in the last Paragraph.
+        keyword to use to search for videos on youtube, make it a crist 2-3 word keyword that can fetch a good footage for the reel from a youtube search
+        Make sure you Oupt an Array
+        Output JSON
+        No Extra Characters
+"""

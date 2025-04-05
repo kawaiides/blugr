@@ -32,3 +32,4 @@ google.generativeai
 browser-cookie3
 selectorlib
 bs4
+git+https://github.com/coqui-ai/TTS.git
